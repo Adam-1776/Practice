@@ -1,0 +1,20 @@
+git clone <url.git> (clone a repository to your local system)
+git add -A (adds all files to staging area)
+git add <filename> (Add file to staging area)
+git restore --staged <filename> (Only remove file from staging area)
+git restore --staged (Remove all files from staging area)
+get restore <filename> (revert file to as it is in staging area
+	discards changes made in working directory)
+git branch (show list of branches)
+git branch <branchname> (Create new branch named branchname)
+git switch <branchname> (Switch to branchname)
+git log (show list of commits, use q to exit)
+git log --oneline (simplified log)
+git status (show status of what's modified, what's staged)
+git commit -m "message" (Commit whatever's in the staging area)
+git restore --source <comomit hash> <filename> (restore file to as it was
+	during commit with the given hash)
+git restore --source <main~2> <filename> (restore file as it was two commits
+	before current tip of main>
+git reset <commit hash> (restore whole project to how it was during 
+	commit with that hash)
