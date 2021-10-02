@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <bits/stdc++.h>
+#include <iterator>
+#include <map>
 using namespace std;
 
 void printArray(int arr[], int n){
@@ -20,7 +22,17 @@ int main(int argc, char **argv){
     arr[i]=temp;
   }
   is.close();
-  printArray(arr,cnt);
+  char letter = 'A';
+  map<char, int> testMap;
+  for(int i=0;i<cnt;++i){
+      testMap.insert(pair<char, int>(letter, arr[i]));
+      ++letter;
+  }
+  cout<<"Printing testMap\n";
+  map<char, int>::iterator itr;
+  for(itr = testMap.begin(); itr != testMap.end(); ++itr) {
+        cout << itr->first <<" "<< itr->second << '\n';
+  }
   return 0;
 
 }
