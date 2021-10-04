@@ -40,5 +40,6 @@ int main(int argc, char **argv){
   //insert() accepts an iterator as its first parameter, and the value to be inserted as the second. Here we insert 5 at index 2
   vector<int> arr= {1,2,3};
   vec.insert(vec.end()-1,arr.begin(),arr.end()); //You can insert one vector into another, starting from any given index like this
+  vec.erase(vec.begin()+1); //Deleting element at index one (second element in vector)
   printVector(vec); //Here, we insert vector arr from the second last index
 }
