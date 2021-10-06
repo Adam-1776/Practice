@@ -9,15 +9,33 @@ using namespace std;
 void printArray(int arr[],int cnt){
     for(int i=0;i<cnt;++i) cout<<arr[i]<<" ";
     cout<<endl;
+    return;
 }
 
-void partition(int arr[], int start, int mid, int end){
-
+void swap(int &one, int &two){
+  int temp=one;
+  one=two;
+  two=temp;
   return;
 }
 
-void quickSort(int arr[], int start, int end){ //Divide and conquer, O(nlogn) complexity
+int partition(int arr[], int start, int end){ //Put all elements less than partition behind it, and the rest ahead of it
+  int pivot=arr[end];
+  int j=start-1;
+  for(int i=start;i<=end-1;++i){
+    if(arr[i]<pivot)
+      swap(arr[++j],arr[i]);
+  }
+  swap(arr[++j],arr[end]);
+  return j;
+}
 
+void quickSort(int arr[], int start, int end){ //Divide and conquer, O(nlogn) complexity. In-place, so doesn't use much memory
+  if(start>end) return;
+  int p=partition(arr,start,end);
+  quickSort(arr,start,p-1);
+  quickSort(arr,p+1,end);
+  return;
 }
 
 int main(int argc, char **argv){
@@ -35,7 +53,7 @@ int main(int argc, char **argv){
   cout<<"Before Quick Sort\n";
   printArray(arr,cnt);
   cout<<"After Quick Sort\n";
-  quickSort(arr, 0, cnt-1);
+  quickSort(arr,0,cnt-1);
   printArray(arr,cnt);
   return 0;
 
