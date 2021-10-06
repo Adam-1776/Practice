@@ -11,6 +11,23 @@ void printArray(int arr[],int cnt){
     cout<<endl;
 }
 
+struct Trunk{
+  Trunk *prev;
+  string str;
+  Trunk(Trunk *prev, string str){
+    this->prev=prev;
+    this->str=str;
+  }
+};
+
+void showTrunks(Trunk *p){
+  if(p==nullptr){
+      return;
+  }
+  showTrunks(p->prev);
+  cout << p->str;
+}
+
 class node{
   private:
     int data;
@@ -36,7 +53,7 @@ class node{
     }
     void printChildren(){
       if(left==NULL && right==NULL)
-        cout<<"It is a leaf node";
+        cout<<"It is a leaf node.";
       if(left!=NULL)
         cout<<"Left child is "<<left->getData()<<". ";
       if(right!=NULL)
@@ -115,16 +132,43 @@ class BST{
     void inorder(node *curNode=NULL, bool recurse=false){
       if(recurse==false && curNode==NULL) curNode=root;
       if(curNode==NULL) return;
-      preorder(curNode->left,true);
+      inorder(curNode->left,true);
       cout<<curNode->getData()<<" ";
-      preorder(curNode->right,true);
+      inorder(curNode->right,true);
     }
     void postorder(node *curNode=NULL, bool recurse=false){
       if(curNode==NULL && recurse==false) curNode=root;
       if(curNode==NULL) return;
-      preorder(curNode->left,true);
-      preorder(curNode->right,true);
+      postorder(curNode->left,true);
+      postorder(curNode->right,true);
       cout<<curNode->getData()<<" ";
+    }
+    void printTree(node* curNode=NULL, Trunk *prev=nullptr, bool isLeft=false, bool recurse=false){
+      if(curNode==NULL && recurse==false) {curNode=root;}
+      if(curNode==NULL || curNode==nullptr){
+        return;
+      }
+      string prev_str = "    ";
+      Trunk *trunk = new Trunk(prev, prev_str);
+      printTree(curNode->right, trunk, true, true);
+      if(!prev){
+        trunk->str = "———";
+      }
+      else if(isLeft){
+        trunk->str=".———";
+        prev_str="   |";
+      }
+      else{
+        trunk->str="`———";
+        prev->str=prev_str;
+      }
+      showTrunks(trunk);
+      cout<<curNode->getData()<<endl;
+      if(prev){
+        prev->str = prev_str;
+      }
+      trunk->str="   |";
+      printTree(curNode->left, trunk, false, true);
     }
 };
 
@@ -142,10 +186,13 @@ int main(int argc, char **argv){
   is.close();
   cout<<"Printing Inorder Traversal\n";
   tree.inorder(); cout<<endl;
-  temp=6;
+  temp=14;
   cout<<"Finding node "<<temp<<endl;
   node* curNode=tree.find(temp);
   cout<<"Found node "<<curNode->getData()<<". "; curNode->printChildren();
+  cout<<"Printing Tree\n\n";
+  //printTree(tree.getRoot(),nullptr,false);
+  tree.printTree();
   return 0;
 
 }
