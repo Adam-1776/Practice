@@ -34,6 +34,15 @@ class node{
       data=n;
       return;
     }
+    void printChildren(){
+      if(left==NULL && right==NULL)
+        cout<<"It is a leaf node";
+      if(left!=NULL)
+        cout<<"Left child is "<<left->getData()<<". ";
+      if(right!=NULL)
+        cout<<"Right child is "<<right->getData()<<".";
+      cout<<endl;
+    }
 };
 
 class BST{
@@ -51,7 +60,20 @@ class BST{
     int size(){
       return numNodes;
     }
+    node* find(int n){
+      node *curNode=root;
+      while(curNode!=NULL){
+        if(curNode->getData()>n)
+          curNode=curNode->left;
+        else if(curNode->getData()<n)
+          curNode=curNode->right;
+        else
+          return curNode;
+      }
+      return NULL;
+    }
     node* insert(int n){
+      cout<<"Inserting "<<n<<endl;
       if(root==NULL){
         root=new node(n);
         return root;
@@ -84,21 +106,21 @@ class BST{
       }
     }
     void preorder(node *curNode=NULL, bool recurse=false){
-      if(recurse==false) curNode=root;
+      if(recurse==false && curNode==NULL) curNode=root;
       if(curNode==NULL) return;
       cout<<curNode->getData()<<" ";
       preorder(curNode->left,true);
       preorder(curNode->right,true);
     }
     void inorder(node *curNode=NULL, bool recurse=false){
-      if(recurse==false) curNode=root;
+      if(recurse==false && curNode==NULL) curNode=root;
       if(curNode==NULL) return;
       preorder(curNode->left,true);
       cout<<curNode->getData()<<" ";
       preorder(curNode->right,true);
     }
     void postorder(node *curNode=NULL, bool recurse=false){
-      if(recurse==false) curNode=root;
+      if(curNode==NULL && recurse==false) curNode=root;
       if(curNode==NULL) return;
       preorder(curNode->left,true);
       preorder(curNode->right,true);
@@ -118,8 +140,12 @@ int main(int argc, char **argv){
     tree.insert(temp);
   }
   is.close();
-  tree.preorder(); cout<<endl;
+  cout<<"Printing Inorder Traversal\n";
   tree.inorder(); cout<<endl;
+  temp=6;
+  cout<<"Finding node "<<temp<<endl;
+  node* curNode=tree.find(temp);
+  cout<<"Found node "<<curNode->getData()<<". "; curNode->printChildren();
   return 0;
 
 }
