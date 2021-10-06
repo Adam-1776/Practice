@@ -13,6 +13,7 @@ void printArray(int arr[],int cnt){
 }
 
 void swap(int &one, int &two){
+  cout<<"Swapping "<<one<<" and "<<two<<endl;
   int temp=one;
   one=two;
   two=temp;
