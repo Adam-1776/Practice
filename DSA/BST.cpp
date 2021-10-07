@@ -89,6 +89,23 @@ class BST{
       }
       return NULL;
     }
+    node* find_parent(int n){
+      node *curNode=root;
+      node *lastNode=root;
+      while(curNode!=NULL){
+        if(curNode->getData()>n){
+          lastNode=curNode;
+          curNode=curNode->left;
+        }
+        else if(curNode->getData()<n){
+          lastNode=curNode;
+          curNode=curNode->right;
+        }
+        else
+          return lastNode;
+      }
+      return NULL;
+    }
     node* insert(int n){
       cout<<"Inserting "<<n<<endl;
       if(root==NULL){
@@ -120,6 +137,58 @@ class BST{
           }
           else return curNode;
         }
+      }
+    }
+    node* find_successor(node *curNode){
+      if(curNode->left!=NULL){
+        curNode=curNode->left;
+      }
+      else return NULL;
+      while(curNode->right!=NULL){
+        curNode=curNode->right;
+      }
+      return curNode;
+    }
+    void remove(int n){
+      node *curNode=find(n);
+      if(curNode==NULL) return;
+      if(curNode->left==NULL && curNode->right==NULL){
+        curNode=find_parent(n);
+        if(curNode->left->getData()==n){
+          free(curNode->left);
+          curNode->left=NULL;
+          --numNodes;
+          return;
+        }
+        if(curNode->right->getData()==n){
+          free(curNode->right);
+          curNode->right=NULL;
+          --numNodes;
+          return;
+        }
+      }
+      else if(curNode->left==NULL && curNode->right!=NULL){
+        curNode->setData(curNode->right->getData());
+        free(curNode->right);
+        curNode->right=NULL;
+        --numNodes;
+        return;
+      }
+      else if(curNode->left!=NULL && curNode->right==NULL){
+        curNode->setData(curNode->left->getData());
+        free(curNode->left);
+        curNode->left=NULL;
+        --numNodes;
+        return;
+      }
+      else{
+        node *successor=find_successor(curNode);
+        int data=(successor->getData());
+        //cout<<"Successor is "<<data<<endl;
+        remove(data);
+        curNode->setData(data);
+        --numNodes;
+        return;
       }
     }
     void preorder(node *curNode=NULL, bool recurse=false){
@@ -187,11 +256,13 @@ int main(int argc, char **argv){
   cout<<"Printing Inorder Traversal\n";
   tree.inorder(); cout<<endl;
   temp=14;
-  cout<<"Finding node "<<temp<<endl;
-  node* curNode=tree.find(temp);
-  cout<<"Found node "<<curNode->getData()<<". "; curNode->printChildren();
+  //cout<<"Finding node "<<temp<<endl;
+  //node* curNode=tree.find(temp);
+  //cout<<"Found node "<<curNode->getData()<<". "; curNode->printChildren();
   cout<<"Printing Tree\n\n";
-  //printTree(tree.getRoot(),nullptr,false);
+  tree.printTree();
+  tree.remove(11);
+  cout<<"\n\n";
   tree.printTree();
   return 0;
 
