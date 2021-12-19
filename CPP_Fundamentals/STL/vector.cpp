@@ -29,13 +29,13 @@ int main(int argc, char **argv){
     is>>temp;
     vec.push_back(temp); //push_back adds an element to end of the vector
   }
-  is.close(); 
+  is.close();
   printVectorItr(vec);
   vec.resize(10,0); //Increase size (number of elements) to ten. If the current size is less than 10,
-  //then append values of zero to the vector until its size is ten
+  //then it will append values of zero to the vector until its size is ten
   cout<<"Last element about to be popped is "<<vec.back()<<endl;
   vec.pop_back(); //Last element in the vector is deleted and the size has decreased to 9
-  printVector(vec); 
+  printVector(vec);
   vec.insert(vec.begin()+2,5); //You can also insert elements in between a vector, and thus shifting the elements after the index
   //insert() accepts an iterator as its first parameter, and the value to be inserted as the second. Here we insert 5 at index 2
   vector<int> arr= {1,2,3};
