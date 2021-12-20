@@ -25,6 +25,7 @@ int main(int argc, char **argv){
   int temp=0;
   is>>cnt;
   vector<int> vec; //Declaring STL vector
+  vector<int> vec2(100) //Declaring a vector of size 100. All all elements are initialized to 0
   for(int i=0;i<cnt;++i){
     is>>temp;
     vec.push_back(temp); //push_back adds an element to end of the vector
@@ -42,4 +43,8 @@ int main(int argc, char **argv){
   vec.insert(vec.end()-1,arr.begin(),arr.end()); //You can insert one vector into another, starting from any given index like this
   vec.erase(vec.begin()+1); //Deleting element at index one (second element in vector)
   printVector(vec); //Here, we insert vector arr from the second last index
+  vec = {}; //This is how you can empty out a vector
+  vector<vector<int>> vec3; //Declaring a 2D vector
+  vec3.push_back(vec); //This is one way to insert into a 2D vector
+  vec3 = {{1,2}}; //Clearing out the 2D vector, and reinitializing it so that vec3[0] contains a vector containing 1 and 2
 }

@@ -18,8 +18,6 @@ void printSet(set<int> testSet){
 
 
 int main(int argc, char **argv){
-  //lists are STL implementation of linked list, therefore, it does not have random access
-  //But elements can be inserted or deleted at any point efficiently, since memory is not contiguous
   if(argc<2) {cout<<"Provide the input file as a command line argument"; return 0;}
   ifstream is(argv[1]);
   int cnt=0;
@@ -38,6 +36,7 @@ int main(int argc, char **argv){
   
   //Overall, set and multiset are very similar to map and multimap respectively, except the keys exist on their own instead
   //of being mapped to another value
+  //The syntax of unordered_set is identical to set. Only difference is that unordered_set does not guarantee any order
 
   return 0;
 } 
