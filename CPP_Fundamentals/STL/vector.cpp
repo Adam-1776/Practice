@@ -47,4 +47,5 @@ int main(int argc, char **argv){
   vector<vector<int>> vec3; //Declaring a 2D vector
   vec3.push_back(vec); //This is one way to insert into a 2D vector
   vec3 = {{1,2}}; //Clearing out the 2D vector, and reinitializing it so that vec3[0] contains a vector containing 1 and 2
+  vec3.push_back({23,24}); //You can also easily add to a 2D vector in this manner. Here, we append vector {23,24} to vec3
 }
