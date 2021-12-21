@@ -46,7 +46,7 @@ vector<int> twoSumFaster(vector<int>& nums, int target) {
     } //This enables us to solve the problem with a single passthrough. It is faster
     return vec;
 }
-
+//Find two integers in the input vector that add up to the target
 //In this problem we use map because we need to return the indices. If we only needed
 //to return the actual numbers, we could use a set
 int main(int argc, char **argv){
