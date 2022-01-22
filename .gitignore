@@ -1,3 +1,5 @@
 *.pdf
 *.exe
 *.out
+*.jar
+*.class
