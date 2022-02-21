@@ -27,6 +27,7 @@ public class TwoSums {
 			if (keepTrack.containsKey(target - arr.get(i))) {
 				ans[0] = keepTrack.get(target - arr.get(i));
 				ans[1] = i;
+				keepTrack.clear(); //clearing Hashmap drastically sped up execution in Leetcode
 				return ans;
 			}
 			keepTrack.put(arr.get(i), i);
