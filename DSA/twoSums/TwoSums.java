@@ -9,10 +9,11 @@ public class TwoSums {
 		File file = new File(fileName);
 		try{
 			FileReader fr = new FileReader(file);
-			BufferedReader br = new BufferedReader(fr);
-			String line = "";
-			while((line = br.readLine()) != null){
-    			arr.add(Integer.parseInt(line));
+			try (BufferedReader br = new BufferedReader(fr)) {
+				String line = "";
+				while((line = br.readLine()) != null){
+					arr.add(Integer.parseInt(line));
+				}
 			}
 		} catch(Exception e){
 			System.out.println(e);
