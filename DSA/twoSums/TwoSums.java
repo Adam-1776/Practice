@@ -1,12 +1,11 @@
 import java.io.*;
-import java.util.Scanner;
 import java.util.*;
 
 //https://leetcode.com/problems/two-sum
 
 public class TwoSums {
 
-	public static void readFile(List arr, String fileName) {
+	public static void readFile(List<Integer> arr, String fileName) {
 		File file = new File(fileName);
 		try{
 			FileReader fr = new FileReader(file);
@@ -21,7 +20,7 @@ public class TwoSums {
 	}
 
 	public static int[] twoSums(List<Integer> arr, int target) {
-		Map<Integer,Integer> keepTrack = new HashMap(arr.size());
+		Map<Integer,Integer> keepTrack = new HashMap<Integer,Integer>(arr.size());
 		int[] ans = new int[2];
 		for (int i = 0; i < arr.size(); ++i) {
 			if (keepTrack.containsKey(target - arr.get(i))) {
@@ -38,7 +37,7 @@ public class TwoSums {
     public static void main(String[] args) {
 		//String fileName = "/home/adam/Documents/Practice/DSA/twoSums/input.txt";
         String fileName = "D:\\Documents\\Practice\\DSA\\twoSums\\input.txt";
-        List<Integer> arr = new ArrayList(100);
+        List<Integer> arr = new ArrayList<Integer>(100);
 		readFile(arr, fileName);
 		System.out.println(Arrays.toString(twoSums(arr, 16)));
     }
