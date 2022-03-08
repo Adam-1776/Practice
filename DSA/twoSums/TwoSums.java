@@ -42,8 +42,8 @@ public class TwoSums {
 	}
 
     public static void main(String[] args) {
-		//String fileName = "/home/adam/Documents/Practice/DSA/twoSums/input.txt";
-        String fileName = "D:\\Documents\\Practice\\DSA\\twoSums\\input.txt";
+		//String fileName = "/home/adam/Documents/Practice/DSA/twoSums/input.txt"; //Linux
+        String fileName = "D:\\Documents\\Practice\\DSA\\twoSums\\input.txt"; //Windows
         List<Integer> arr = new ArrayList<Integer>(100);
 		readFile(arr, fileName);
 		System.out.println(Arrays.toString(twoSums(arr, 16)));
