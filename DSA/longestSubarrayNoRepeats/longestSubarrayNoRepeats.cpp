@@ -40,7 +40,7 @@ the character that's causing the repetiton!
 //In this problem, we find the length of the longest substring that has all unique characters
 int main(int argc, char **argv){
   string input = "aardvard";
-  cout<<solution(input);
+  cout<<lengthOfLongestSubstring(input);
   return 0;
 
 }
