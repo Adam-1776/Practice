@@ -6,7 +6,7 @@ def twoSum(nums: list[int], target: int) -> list[int]:
         temp = target - nums[n]
         if temp in dict:
             return [n,dict[temp]]
-        if nums[n] not in dict: #Note: this if condition can be removed, since we know there cannot be two indices with the same value
+        if nums[n] not in dict: #Note: this if-condition can be removed, since we know there cannot be two indices with the same value
             dict[nums[n]] = n
 
 #Note that it's important to first check if the value we're looking for is already in the dictionary, before we add the current
