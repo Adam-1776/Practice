@@ -77,7 +77,7 @@ class RandomizedCollection:
         self.Dict[swapVal].add(valIndex) #Adding the index to be removed to the set of indices for the swap value, since we're going to replace this index with the swap value
         self.List[valIndex] = swapVal #Replacing the index to be removed with the swap value. Added this new index to the swap value's set in the line above
         self.Dict[swapVal].discard(len(self.List)-1) #The last item in the list is a duplicate of the swap value. We're going to remove it from the set of indices
-        self.List.pop() #The last item inthe list is a duplicate of the swap value. Removing it from the list. Already removed it from the dictionary in the line above
+        self.List.pop() #The last item in the list is a duplicate of the swap value. Removing it from the list. Already removed it from the dictionary in the line above
         #print(self.Dict)
         #print(self.List)
         if len(self.Dict[val]) == 0 : #If there are no indices remaining storing the val (ie empty set), we remove the entire item from the dictionary
