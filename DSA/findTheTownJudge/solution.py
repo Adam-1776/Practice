@@ -6,7 +6,7 @@ class Solution:
     def findJudge(self, n: int, trust: list[list[int]]) -> int:
         # [a,j] will exist for every value a except j
         # [j,a] will never exist for any value a
-        trustedBy = defaultdict(int) #Dictionary where the key is the person, and the value is the number of they are trusted by
+        trustedBy = defaultdict(int) #Dictionary where the key is the person, and the value is the number of people they are trusted by
         #We setup a defaultdict with default value 0 for convenience. 
         candidates = set(i for i in range(1,n+1)) #Set of people who trust no one. Initializing with all people 1 through n
         for i in trust:
