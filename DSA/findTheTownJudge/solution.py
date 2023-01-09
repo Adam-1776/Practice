@@ -19,6 +19,20 @@ class Solution:
         
         return -1 #This line is only reached if no judge is present.
 
+    #findJudge2 is identical to findJudge except we use a list instead of a defaultdict
+    def findJudge2(self, n: int, trust: list[list[int]]) -> int:
+        trustedBy = [0] * (n+1)
+        candidates = set(i for i in range(1,n+1))
+        for i in trust:
+            trustedBy[i[1]] += 1
+            candidates.discard(i[0])
+
+        for c in candidates:
+            if trustedBy[c] == n-1 : return c
+        
+        return -1
+         
+
 
 def main():
     solution = Solution()
