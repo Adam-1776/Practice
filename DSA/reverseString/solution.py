@@ -1,7 +1,7 @@
 #https://leetcode.com/problems/reverse-string-ii/
 
 class Solution:
-    #Simple implementation, not the most efficient
+    #Simple implementation, but not the most efficient
     def reverseStr(self, s: str, k: int) -> str:
         #In the line below, we use list comprehension to split the string into a list of strings with length 2*k
         #The last string in this list may be shorter than 2*k for obvious reasons. The technique above works because
