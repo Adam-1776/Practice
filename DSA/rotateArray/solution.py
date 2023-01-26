@@ -9,6 +9,11 @@ class Solution:
         for i in range(0,len(nums)):
             nums[i] = solutionList[i]
 
+    #More concise implementation using slicing
+    def rotate2(self, nums: list[int], k: int) -> None:
+        shift = k % len(nums) #This is needed if k > len(list)
+        newStartIndex = len(nums) - shift #The starting index of our new list
+        nums[:] = nums[newStartIndex:] + nums[:newStartIndex] #The [:]= operator copies values to the list in-place instead of doing reassignment
 
 def main():
     solution = Solution()
