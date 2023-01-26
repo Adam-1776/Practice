@@ -28,6 +28,12 @@ class Solution:
         
         return "".join(listChars) #Return this list after converting it back to a string.
 
+    #Recursive approach, more efficient
+    def reverseStr3(self, s: str, k: int) -> str:
+        if len(s)<(k):return s[::-1] #Base case 1: need to reverse the entire string
+        if len(s)<(2*k):return (s[:k][::-1]+s[k:]) #Base case 2: We are in the last segment of the string, reverse first k characters of this segment
+        #The line below is only reached if there are more characters to the right that need to be processed.
+        return s[:k][::-1]+s[k:2*k]+self.reverseStr(s[2*k:],k)  #Concatenate our current processed segment with the results for the rest of the string. 
 
 def main():
     solution = Solution()
