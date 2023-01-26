@@ -16,7 +16,7 @@ class Solution:
         else:
             median1 = math.floor((len(nums1) + len(nums2)) / 2)
         
-        #print(f'median1 = {median1} and median2 = {median2}')
+        print(f'median1 = {median1} and median2 = {median2}')
         index1 = 0
         index2 = 0
         count = 0
@@ -57,10 +57,15 @@ class Solution:
 
 def main():
     solution = Solution()
-    print(solution.findMedianSortedArrays([1,2],[2,3]))
+    print(solution.findMedianSortedArrays([1,2],[2,3])) #2.0
     nums1 = [1,1,1,1,10,11,11,11,11]
     nums2 = [8,8,8,8,9,12,12,12,12]
-    print(solution.findMedianSortedArrays(nums1,nums2))
+    print(solution.findMedianSortedArrays(nums1,nums2)) #9.5
 
 if __name__ == "__main__": #Entry point
     main() #Calling main method
+
+# [1,1,1,1,10,11,11,11,11] nums1, it's median is 10
+# [7,7,8,8,8,8,9,12,12,12,12,13,13] nums2, it's median is 9
+# combined median indexs are 10 and 11
+# [1,1,1,1,7,7,8,8,8,8,9,10,11,11,11,11,12,12,12,12,13,13] #Combined array, median is 9.5
