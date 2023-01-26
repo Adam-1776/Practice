@@ -52,9 +52,15 @@ class Solution:
         else:
             return float((list1[median1] + list1[median2]) / 2)
 
+
+#The smart way to do this is to eliminate as much of the solution space as possible. 
+
 def main():
     solution = Solution()
     print(solution.findMedianSortedArrays([1,2],[2,3]))
+    nums1 = [1,1,1,1,10,11,11,11,11]
+    nums2 = [8,8,8,8,9,12,12,12,12]
+    print(solution.findMedianSortedArrays(nums1,nums2))
 
 if __name__ == "__main__": #Entry point
     main() #Calling main method
