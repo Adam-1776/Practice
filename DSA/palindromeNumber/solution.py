@@ -11,18 +11,20 @@ class Solution:
             right -= 1
         return True
 
-    #Implementation without converting to string, more efficient
+    #Implementation without converting to string, a bit more efficient
     def isPalindrome2(self, x: int) -> bool:
         y = x #Saving original value of x
-        if x < 0: return False
+        if x < 0: return False #Negative numbers cannot be palindromes since the negative sign is only on one side
         sum = 0
         while x > 0:
             sum = (x % 10) + (sum * 10) #Take the rightmost digit of x, add it to our sum.
             x = x // 10 #Remove the rightmost digit of x
         #Above, we've set integer sum to be what x would be if read from right to left
         #To do this, we act like we're reading the digits from right to left,
-        #even though we're reading from left to right in reality. Each time we add a new digit
-        #we the value of the existing digits (stored in sum) go up by a factor of 10.
+        #even though we're reading from left to right in reality. Each time we add a new digit to the right
+        #the value of the existing digits (stored in sum) go up by a factor of 10. For example, if we add the a digit
+        #to the right of 12 so that it becomes 124 for example, the value of the two digits that were already there jump from 12 to 120
+        #Similarly, if you remove the rightmost digit a number, the value of the remaining digits is divided by 10.
         return sum == y
 
 
