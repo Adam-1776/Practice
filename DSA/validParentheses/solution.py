@@ -3,6 +3,7 @@ from collections import deque
 #https://leetcode.com/problems/valid-parentheses/
 
 class Solution:
+    #A somewhat verbose implementation
     def isValid(self, s: str) -> bool:
         if len(s) < 2 : return False #String must have at least two characters to be balanced
         brackets = [] #Using this list like a stack
@@ -26,6 +27,7 @@ class Solution:
                     return False
         return len(brackets) == 0
 
+    #More concise solution using a dictionary and a deque
     def isValid2(self, s: str) -> bool:
         if len(s) < 2 : return False #Must have two characters to be balanced
         stack = deque() #Initialize an empty deque, we'll use it as a stack
@@ -47,7 +49,7 @@ class Solution:
 def main():
     solution = Solution()
     print(solution.isValid("()[]{}")) #True
-    print(solution.isValid("()[]{}")) #True
+    print(solution.isValid2("()[]{}")) #True
 
 if __name__ == "__main__": #Entry point
     main() #Calling main method
