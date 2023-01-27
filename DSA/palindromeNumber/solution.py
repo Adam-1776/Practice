@@ -24,13 +24,14 @@ class Solution:
         #even though we're reading from left to right in reality. Each time we add a new digit to the right
         #the value of the existing digits (stored in sum) go up by a factor of 10. For example, if we add the a digit
         #to the right of 12 so that it becomes 124 for example, the value of the two digits that were already there jump from 12 to 120
-        #Similarly, if you remove the rightmost digit a number, the value of the remaining digits is divided by 10.
+        #Similarly, if you remove the rightmost digit from a number, the value of the remaining digits is divided by 10.
         return sum == y
 
 
 def main():
     solution = Solution()
     print(solution.isPalindrome(4554)) #True
+    print(solution.isPalindrome2(845548)) #True
 
 if __name__ == "__main__": #Entry point
     main() #Calling main method
