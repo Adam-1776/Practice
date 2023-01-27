@@ -42,9 +42,9 @@ class Solution:
             #print(s[i])
             sum += digitMap[s[i]] #Get the value of the current roman digit from the map
             #print(f'Adding {digitMap[s[i]]}')
-            if i > 0 and digitMap[s[i-1]] < digitMap[s[i]] :
+            if i > 0 and digitMap[s[i-1]] < digitMap[s[i]] : #If the previous digit is lesser than the current digit ...
                 sum -= digitMap[s[i-1]] * 2 #Important: If we realize we need to subtract the previous digit, we must subtract it twice!
-                #We subtract twice because we had previously added that digit erroneously. Example: In 'IV', the digit 'I' is not added, it is only subtracted
+                #We subtract twice because in the previous iteration we had added that previous digit erroneously. Example: In 'IV', the digit 'I' is not added, it is only subtracted
                 #print(f'Subtracting {digitMap[s[i-1]]}')
             i += 1
         return sum
