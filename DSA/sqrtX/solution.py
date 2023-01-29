@@ -1,6 +1,4 @@
-from collections import defaultdict
 #https://leetcode.com/problems/sqrtx/
-
 
 class Solution:
     #Linear time complexity, not the most efficient
