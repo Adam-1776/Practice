@@ -16,14 +16,16 @@ class Solution:
             #We need create a new copy of numList since we will overwrite numList in the next row
         return triangle
 
-    #Same approach, but use a try catch to catch index errors.
+    #Does NOT work, same approach, but use a try catch to catch index errors.
     def generate2(self, numRows: int) -> list[list[int]]:
         if numRows < 1 : return None
         triangle = [[1]]
         for row in range(1,numRows) :
             numList = []
             for n in range(row+1) :
-                try :
+                val1 = 0
+                val2 = 0
+                try : #No index error is caught because negative indexes are valid in python, they just start counting from the back!
                     val1 = triangle[row-1][n]
                 except IndexError: 
                     val1 = 0 
