@@ -2,10 +2,28 @@ from typing import Optional
 
 #https://leetcode.com/problems/add-two-numbers
 
+
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
+
+    def printList(self) :
+        cur = self
+        numstr = ""
+        while cur :
+            numstr += str(cur.val) + " "
+            cur = cur.next
+        print(numstr)
+
+def createList(nums: list[int]) -> ListNode :
+    if len(nums) < 1 : return None
+    cur = ListNode(nums[0])
+    head = cur
+    for i in range(1,len(nums)):
+        cur.next = ListNode(nums[i])
+        cur = cur.next
+    return head
 
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
@@ -35,7 +53,7 @@ class Solution:
         return ret
 
     #Same approach, but a bit more concise and elegant
-    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+    def addTwoNumbers2(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
         dummy = ListNode() #Dummy points to an empty node before the first actual node. 
         cur = dummy #Start off with the dummy node. We haven't created any 'real' nodes yet
         carry = 0
@@ -62,7 +80,15 @@ class Solution:
 
 
 def main():
-    print('Would have to instantiate a linked list to execute it here')
+    solution = Solution()
+    nums = [4,3,2,1] #1234 since the digits are stored in reverse order
+    nums2 = [8,7] #78 since the digits are stored in reverse order
+    head1 = createList(nums)
+    head2 = createList(nums2)
+    ans = solution.addTwoNumbers2(head1, head2) #2131 which represents 1312
+    ans.printList()
+    
+    
 
 if __name__ == "__main__": #Entry point
     main() #Calling main method
