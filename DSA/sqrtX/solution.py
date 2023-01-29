@@ -18,7 +18,7 @@ class Solution:
         while True : #We can use an infinite loop here because we know every positive integer must have a square root we can find
             mid = (l + r) // 2 #Integer division
             #print(f'l = {l} and r = {r} and mid = {mid}')
-            if mid * mid <= x and (mid+1) * (mid+1) > x : #We're looking rounding to the integer value
+            if mid * mid <= x and (mid+1) * (mid+1) > x : #We're looking for the rounded down integer value
                 return mid
             elif x / mid > mid : #If our mid is too small ...
                 l = mid
