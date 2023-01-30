@@ -21,7 +21,7 @@ class Solution:
 def main():
     solution = Solution()
     list1 = [29,47,21,41,13,37,25,7]
-    print(solution.rotate(list1)) # -1
+    print(solution.mostFrequentEven(list1)) # -1
 
 if __name__ == "__main__": #Entry point
     main() #Calling main method
