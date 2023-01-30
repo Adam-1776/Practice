@@ -1,6 +1,6 @@
 from typing import Optional
 
-#https://leetcode.com/problems/add-two-numbers
+#https://leetcode.com/problems/merge-two-sorted-lists/
 
 
 class ListNode:
@@ -37,7 +37,7 @@ class Solution:
         while list1 and list2:
             if list1.val < list2.val :
                 cur.next = ListNode(list1.val)
-                list1 = list1.next
+                list1 = list1.next #Be careful, we only advance one list in each iteration
             else :
                 cur.next = ListNode(list2.val)
                 list2 = list2.next
