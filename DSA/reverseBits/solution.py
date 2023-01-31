@@ -15,7 +15,7 @@ class Solution:
         i = 0
         bitList = [0] * 32 #List to store binary representation of n
         while n > 0 : #Convert out integer to binary
-            bitList[31 - i] = n % 2 #Populate the list from right to left, since we're processing digits from right to left
+            bitList[31 - i] = n % 2 #Populate the list from right to left, since we're processing digits from right to left. We can do this since we know our list has length 32.
             n = n // 2
             i += 1
         bitListReversed = bitList[::-1] #Reverse the binary list
@@ -24,6 +24,8 @@ class Solution:
         for d in reversed(bitListReversed) : #Convert the reversed binary representation back to an integer
             sum += d * (2 ** place)
             place += 1
+        #Above, we reversed the initial binary representation, and then reversed it again to convert it to an integer
+        #This was done for clarity, though it's more efficient to forgo any reversing at all for this problem.
         return sum
 
 def main():
