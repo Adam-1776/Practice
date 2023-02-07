@@ -5,7 +5,7 @@ class Solution:
     def moveZeroes(self, nums: list) -> None:
         slow = 0
         for fast in range(len(nums)):
-            if nums[fast] != 0 and nums[slow] == 0: #If we find a 0 to the left of our right pointer, swap them
+            if nums[fast] != 0 and nums[slow] == 0: #If we find a 0 to the left of our right pointer, swap them. This moves the 0 towards the right.
                 nums[slow], nums[fast] = nums[fast], nums[slow]
 
             if nums[slow] != 0: #Increment the left pointer if it is not pointing to a zero
