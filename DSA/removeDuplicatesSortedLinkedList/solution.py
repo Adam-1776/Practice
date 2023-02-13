@@ -41,6 +41,17 @@ class Solution:
         leftNode.next = None #After the loop, the left pointer points to the last unique node. End the list here.
         return head
 
+    #Alternate approach using single pointer
+    def deleteDuplicates2(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head: return None
+        current = head
+        while current.next: #Keep going until the second last Node since we compare the current node with the one ahead of it
+            if current.val == current.next.val: #If the next node has the same value
+                current.next = current.next.next #Make the current node point to the one twice ahead
+            else:
+                current = current.next #Once we find a unique node, make the current node point to it. This will skip any duplicate nodes we had encountered
+        return head
+
 
 def main():
     solution = Solution()
