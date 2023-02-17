@@ -1,4 +1,5 @@
 #https://leetcode.com/problems/pascals-triangle/
+#https://leetcode.com/problems/pascals-triangle-ii/solutions/
 
 class Solution:
     def generate(self, numRows: int) -> list[list[int]]:
@@ -37,6 +38,20 @@ class Solution:
             triangle.append(numList[:]) #The list append method only copies the pointer by default. We have to use [:] to append a new copy
             #We need create a new copy of numList since we will overwrite numList in the next row
         return triangle
+
+    #Space efficient solution for Pascal II, only stores one row at a time instead of the whole triangle
+    def getRow(self, rowIndex: int) -> list[int]:
+        currRow = 0
+        currRowList = [1]
+        while currRow < rowIndex:
+            nextRow = []
+            currRow += 1
+            for i in range(0, currRow + 1):
+                leftParent = 0 if i-1 < 0 else currRowList[i-1]
+                rightParent = 0 if i > len(currRowList) - 1 else currRowList[i]
+                nextRow.append(leftParent + rightParent)
+            currRowList = nextRow
+        return currRowList
          
 
 
