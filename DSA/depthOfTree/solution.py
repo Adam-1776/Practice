@@ -1,5 +1,5 @@
 from typing import Optional
-
+#https://leetcode.com/problems/minimum-depth-of-binary-tree/
 #https://leetcode.com/problems/maximum-depth-of-binary-tree/
 
 
@@ -27,11 +27,26 @@ def createList(nums: list[int]) -> ListNode :
 """
 
 class Solution:
-    #Recursive solution
+    #Recursive solution for depth of tree
     def maxDepth(self, root: Optional[TreeNode]) -> int:
         if root == None : #Terminal case
             return 0
         return max(1 + self.maxDepth(root.left) , 1 + self.maxDepth(root.right))
+
+    #Recursive solution for minimum depth between root and any leaf node
+    def minDepth(self, root: Optional[TreeNode]) -> int:
+        #This problem is tricker than max depth of tree!
+        #We cannot simply stop at a 'None' node, since the parent of this 'None' node may not be a leaf node, have to be more careful
+        def depth(node):
+            if node == None : return 0 #Terminal case
+            if node.left == None and node.right == None: return 1 #Terminal case where have found a leaf node
+            leftDepth = depth(node.left)
+            rightDepth = depth(node.right)
+            if node.left == None : return 1 + rightDepth #If left child is absent, we know there must be a right child since we already checked for leaf node condition
+            if node.right == None : return 1 + leftDepth #If right child is absent, we know there must be a left child
+            return min(leftDepth + 1 , rightDepth + 1)
+
+        return depth(root)
 
 
 def main():
