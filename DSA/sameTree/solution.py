@@ -36,8 +36,8 @@ class Solution:
             if p == None or q == None : return False
             return p.val == q.val
 
-        if not isSameNode(p,q) : return False
-        if p == None and q == None : return True
+        if not isSameNode(p,q) : return False #If both roots are different, return False
+        if p == None and q == None : return True #If both roots are None, return True
         return self.isSameTree(p.left ,q.left) and self.isSameTree(p.right ,q.right)
 
 
