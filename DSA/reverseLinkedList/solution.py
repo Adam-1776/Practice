@@ -26,6 +26,7 @@ def createList(nums: list[int]) -> ListNode :
     return head
 
 class Solution:
+    #Simple approach with O(n) space complexity, since we store pointers to all the nodes
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         if not head : return None
         nodeList = []
@@ -37,6 +38,19 @@ class Solution:
             nodeList[i].next = nodeList[i-1]
         nodeList[0].next = None #The first element in the list (tail node in the new linked list) needs its next pointer set
         return nodeList[-1] #Return the new head of the reversed linked list
+
+    #Approach with O(1) space complexity
+    def reverseList2(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        #keep track of two nodes at once, make temp point to prev
+        prev = None
+        temp = head
+        while temp:
+            next = temp.next #Record the node ahead
+            temp.next = prev #Set temp to point to prev next
+            prev = temp #Move prev forward
+            temp = next #Move temp forward
+        #At the end of the loop, temp will be None and prev will be the new head
+        return prev
 
 
 def main():
