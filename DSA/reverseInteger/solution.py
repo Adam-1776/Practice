@@ -19,7 +19,7 @@ class Solution:
             return reverseInt
 
     #This solution fits the spirit of the problem since it does not store integers exceeding 32 bits
-    def reverse(self, x: int) -> int:
+    def reverse2(self, x: int) -> int:
         reverseInt = 0
         maxInt = 2**31 - 1 #Biggest 32 bit signed integer
         minInt = -1 * 2**31 #Smallest 32 bit signed integer
