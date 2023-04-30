@@ -17,8 +17,8 @@ class Solution:
                     if numSubArrays > k : return False
             return True
         
-        #Use binary search to find the minimum acceptable subLimit that satisfies the condition method, checkSubArraySum()
-        left, right = max(nums), sum(nums) #We know the minimum subarray in any case has to be the greatest integer in the array (if the size of a subarray is one)
+        #Use binary search to find the minimum subLimit that satisfies the condition method, checkSubArraySum()
+        left, right = max(nums), sum(nums) #We know the minimum subarray sum in any case has to be the greatest integer in the array (if the size of a subarray is one)
         #And the most it can be is the sum of the entire array (in case there is just one subarray)
         while left < right:
             mid = left + (right - left) // 2
@@ -30,7 +30,7 @@ class Solution:
 
 def main():
     solution = Solution()
-    print(solution.shipWithinDays([1,2,3,4,5],2))
+    print(solution.splitArray([1,2,3,4,5],2))
 
 if __name__ == "__main__": #Entry point
     main() #Calling main method
