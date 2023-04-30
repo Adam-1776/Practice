@@ -28,6 +28,29 @@ class Solution:
             else:
                 left = mid + 1
         return left
+    
+    #Slightly faster approach, simplify the condition helper method
+    def shipWithinDays2(self, weights: list[int], days: int) -> int:
+        #No longer have to worry about a package that weighs more than the capacity, can simplify a bit
+        def checkCapacity(capacity: int) -> bool:
+            numDays = 1
+            currWeight = 0
+            for weight in weights:
+                currWeight += weight
+                if currWeight > capacity:
+                    numDays += 1
+                    if numDays > days : return False
+                    currWeight = weight
+            return True
+
+        left, right = max(weights), sum(weights) #We know the capacity must be at least the weight of the greatest package, narrows the search space
+        while left < right:
+            mid = left + (right - left) // 2
+            if checkCapacity(mid):
+                right = mid
+            else:
+                left = mid + 1
+        return left
 
 def main():
     solution = Solution()
