@@ -5,9 +5,9 @@ class Solution:
     def findKthNumber(self, m: int, n: int, k: int) -> int:
         #Condition: are there at least k values inside the multiplication table that <= num ?
         def checkPosition(num):
-            smallerValues = 0
-            for row in range(1, m+1):
-                smallerValues += min((num // row), n)
+            smallerValues = 0 #Number of values in the table found that are <= num
+            for row in range(1, m+1): #Traverse the table row by row
+                smallerValues += min((num // row), n) #How many integers in this row that are <= num? Add it to our count
                 if smallerValues >= k : return True
             return False
 
