@@ -9,6 +9,7 @@ class Solution:
             sum = 0
             for num in nums:
                 sum += math.ceil(num / divisor) #Divide this way since the quotient is rounded up
+                # sum += (((num-1) // divisor) + 1) This way also works
                 if sum > threshold : return False
             return True
 
