@@ -11,8 +11,8 @@ class Solution:
             #However, we want to keep the intersections of a,b,c so we add it at the end of line 12
             count = (value//a) + (value//b) + (value//c) + (value//abc)
             count -= ((value//ab) + (value//bc) + (value//ac))
-            #As a general principle, if there are three overlapping cirlces a,b,c the combined area excluding overlaps are:
-            #F(N) = (a + b + c) - (a ∩ c - a ∩ b - b ∩ c) + (a ∩ b ∩ c)
+            #As a general principle, if there are three overlapping circles a,b,c the combined area excluding overlaps are:
+            #F(N) = (a + b + c) - (a ∩ c + a ∩ b + b ∩ c) + (a ∩ b ∩ c)
             #We use this principle to find the number of ugly numbers greater than or lesser than value in this method
             return count >= n
 
