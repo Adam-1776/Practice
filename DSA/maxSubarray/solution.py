@@ -1,8 +1,34 @@
 #https://leetcode.com/problems/maximum-subarray/
 
 class Solution:
-    #Brute force approach
+    #Fast approach using Kadale's algorithm / Sliding window
+    #The trick is to know that the max subarray must have a positive start. It will not start with a negative value
+    #or a starting subarray with a negative value. Note: If the entire subarray is full of negative integers then the subarray
+    #is simply the biggest integer, this code handles that case also.
     def maxSubArray(self, nums: list[int]) -> int:
+        largestSum = -999999999
+        largestSubArray = [0,0] #Left and right index that comprises the maximum subarray
+        #Using a left pointer is optional and only needed if we want to record the indices of the max subarray
+        left, right, = 0, 0
+        currSum = 0 #Sum of the subarray we are currently assessing
+        while right < len(nums) and left < len(nums): #Keep going until both pointers are the end
+            currSum += nums[right] #Stretch the current subarray one step to the right
+            if currSum > largestSum: #Found a biggest subarray!
+                largestSum = currSum
+                largestSubArray = [left,right]
+            if currSum < 0: #Our current subarray is negative, so we know it is not a part of the maximum subarray. We know this since
+                #the maximum subarray must have a positive start. The maximum subarray cannot start with a negative value/subarray, since it
+                #would be better to just discard such a starting value/subarray.
+                left = right + 1 #Move the left pointer in front of the right pointer, since everything upto and including the right pointer
+                #is not part of the maximum subarray
+                currSum = 0
+            right += 1
+        print(f'The largest subarray is from index {largestSubArray[0]} to {largestSubArray[1]}')
+        return largestSum
+    
+
+    #Brute force approach
+    def maxSubArray2(self, nums: list[int]) -> int:
         largestSum = -999999999
         currSum = 0
         latestIncrease = -1
@@ -16,6 +42,8 @@ class Solution:
                 currSum += nums[right]
                 if currSum > largestSum : largestSum = currSum #Update the largest subarray sum so far
         return largestSum
+
+    
 
 def main():
     solution = Solution()
