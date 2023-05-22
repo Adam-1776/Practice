@@ -10,7 +10,7 @@ class Solution:
         while queue:
             currNode = queue.popleft()
             output.append(currNode)
-            for node in graph[currNode]:
+            for node in graph[currNode]: #Iterate over neighbors of currNode
                 queue.append(node)
                 if node == '8': #If we found our target node...
                     print(f'distance from 5 to 8 is {steps}')
@@ -28,7 +28,7 @@ class Solution:
         while queue:
             currNode = queue.popleft()
             output.append(currNode)
-            for node in graph[currNode]:
+            for node in graph[currNode]: #Iterate over neighbors of currNode
                 if node not in visited:
                     queue.append(node)
                     visited.add(node)
@@ -56,7 +56,7 @@ class Solution:
                 print(f'Distance between 5 and 8 is {len(path) - 1} and the path is {path}')
             output.append(currNode) #Record current node in normal traversal list
             visited.add(currNode) #Keep track of visitors
-            for node in graph[currNode]:
+            for node in graph[currNode]: #Iterate over neighbors of currNode
                 if node not in visited:
                     #Below line is key! We generate the full path to reach 'node' by appending 'node' to the current path
                     #We have to generate a brand new list that ends with 'node', and we append it to our queue
