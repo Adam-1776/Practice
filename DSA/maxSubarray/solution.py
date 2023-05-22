@@ -16,7 +16,7 @@ class Solution:
             if currSum > largestSum: #Found a biggest subarray!
                 largestSum = currSum
                 largestSubArray = [left,right]
-            if currSum < 0: #Our current subarray is negative, so we know it is not a part of the maximum subarray. We know this since
+            if currSum < 0: #Our current subarray is negative, so we know it is not a start of the maximum subarray. We know this since
                 #the maximum subarray must have a positive start. The maximum subarray cannot start with a negative value/subarray, since it
                 #would be better to just discard such a starting value/subarray.
                 left = right + 1 #Move the left pointer in front of the right pointer, since everything upto and including the right pointer
