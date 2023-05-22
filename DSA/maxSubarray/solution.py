@@ -11,7 +11,7 @@ class Solution:
         #Using a left pointer is optional and only needed if we want to record the indices of the max subarray
         left, right, = 0, 0
         currSum = 0 #Sum of the subarray we are currently assessing
-        while right < len(nums) and left < len(nums): #Keep going until both pointers are the end
+        while right < len(nums) and left < len(nums): #Keep going until either pointer reaches the end
             currSum += nums[right] #Stretch the current subarray one step to the right
             if currSum > largestSum: #Found a biggest subarray!
                 largestSum = currSum
@@ -23,7 +23,7 @@ class Solution:
                 #is not part of the maximum subarray
                 currSum = 0
             right += 1
-        print(f'The largest subarray is from index {largestSubArray[0]} to {largestSubArray[1]}')
+        print(f'The largest subarray is from index {largestSubArray[0]} to {largestSubArray[1]} with sum {largestSum}')
         return largestSum
     
 

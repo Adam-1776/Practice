@@ -44,6 +44,7 @@ class MyCircularQueue:
         return self.size <= 0
 
     def isFull(self) -> bool:
+        #alternatively, check if back == front
         return self.size >= self.capacity
 
 

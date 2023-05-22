@@ -12,7 +12,7 @@ class Solution:
                 else: #both a and top of stack destroy each other
                     stack.pop()
                     break
-            else:
+            else: #This else statement is always executed UNLESS we entered the above while loop AND a break statement was executed
                 stack.append(a)
         return stack
          
