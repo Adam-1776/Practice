@@ -8,7 +8,7 @@ class Solution:
         visited = set() #Hold all the nodes we have visited in tuple form
         numIslands = 0
 
-        def isLand(coordinates: tuple) -> bool: #Helper method to quickly check if a node represented as a tuple is water
+        def isLand(coordinates: tuple) -> bool: #Helper method to quickly check if a node represented as a tuple is land
             x, y = coordinates[0], coordinates[1]
             if x < 0 or x >= n: #x out of bounds
                 print(f'Coordinates [{x}][{y}] is water')
@@ -36,15 +36,40 @@ class Solution:
                     if (neighborNode not in visited) and isLand(neighborNode): #Found another land node that's part of this island
                         queue.append(neighborNode)
                     visited.add(neighborNode) #Add neighborNode to visited regardless of whether it's land or water
-
+                    #Note: We can also only add neighborNode to visited if it's land, that also works since in our main loop, we only
+                    #enter BFS for a node if it's unvisited AND land
 
         for x in range(n):
             for y in range(m):
                 if (x,y) not in visited and isLand((x,y)): #We have found a node that's part of an undiscovered island!
                     numIslands += 1
                     bfs(x,y)
-
         return numIslands
+
+    #Simpler solution, use recursion instead of BFS to traverse outwards from each unvisited land node
+    def numIslands2(self, grid: list[list[str]]) -> int:
+        n, m = len(grid[0]), len(grid) #n is horizontal length, m is vertical height
+        numIslands = 0
+
+        def exploreIsland(x: int, y: int): #Helper method to recursively mark all nodes belonging to current island
+            if x >= m or x < 0 or y >=n or y < 0 : return #Exceeding bounds of grid means water, and thus end of island
+            if grid[x][y] == "1": #If this node is an unvisited land node, it must be part of this island
+                grid[x][y] = "2" #Mark this node as visited and belonging to an already explored island
+                exploreIsland(x+1, y) #Recursively explore each neighbor
+                exploreIsland(x-1, y)
+                exploreIsland(x, y+1)
+                exploreIsland(x, y-1)
+            else: #If we hit water, it means we've hit our terminal case since we reached end of island
+                return
+            
+        for x in range(m):
+            for y in range(n):
+                if grid[x][y] == "1":
+                    numIslands += 1
+                    exploreIsland(x,y)
+        return numIslands
+
+        
     
 #The idea is to perform a bfs when we find an unvisited land node. This univisited land node is guaranteed to be part of a new island, since if it was
 #part of an existing island it would have already been visited. Then take this unvisited land node and perform bfs to find all the other land nodes that
@@ -58,7 +83,7 @@ def main():
     ["0","0","1","0","0"],
     ["0","0","0","1","1"]]
     solution = Solution()
-    print(solution.numIslands(grid))
+    print(solution.numIslands(grid)) #3
     
     
 
