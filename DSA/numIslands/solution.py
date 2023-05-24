@@ -47,6 +47,10 @@ class Solution:
         return numIslands
 
     #Simpler solution, use recursion instead of BFS to traverse outwards from each unvisited land node
+    #This recursive approach ends up behaving like DFS, which makes sense since recursion and DFS both use stacks
+    #It doesn't matter for this problem whether we use BFS/DFS/recursion since our goal is simply to discover all nodes
+    #in the island and the order in which we discover thme doesn't matter
+    #Here, we mark a node as "2" to indicate it's been visited and is part of an already discovered island
     def numIslands2(self, grid: list[list[str]]) -> int:
         n, m = len(grid[0]), len(grid) #n is horizontal length, m is vertical height
         numIslands = 0
