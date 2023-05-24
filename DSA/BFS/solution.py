@@ -2,6 +2,8 @@ from collections import deque
 
 class Solution:
     #Barebones implementation, does not keep track of visited nodes and is prone to cycles and nodes with multiple incoming connections
+    #Also, this implementation should not be used to find the minimum distance from one node to another if a node can have multiple univisited neighbors
+    #In such graphs, the traversal is done correctly but it does not count distance correctly from root to target node
     def bfs(self, graph: dict[str, list]) -> list[str]:
         output = [] #Store the bfs traversal order
         steps = 0
@@ -9,15 +11,17 @@ class Solution:
         queue.append('5') #Append root node
         while queue:
             currNode = queue.popleft()
+            if currNode == '8': #If we found our target node...
+                print(f'distance from 5 to 8 is {steps}')
             output.append(currNode)
             for node in graph[currNode]: #Iterate over neighbors of currNode
                 queue.append(node)
-                if node == '8': #If we found our target node...
-                    print(f'distance from 5 to 8 is {steps}')
             steps += 1
         return output
     
     #This implementation keeps track of visited nodes using a set, so it avoids cycles
+    #Also, this implementation should not be used to find the minimum distance from one node to another if a node can have multiple univisited neighbors
+    #In such graphs, the traversal is done correctly but it does not count distance correctly from root to target node
     def bfs2(self, graph: dict[str, list]) -> list[str]:
         output = [] #Store the bfs traversal order
         steps = 0
@@ -28,14 +32,59 @@ class Solution:
         while queue:
             currNode = queue.popleft()
             output.append(currNode)
+            if currNode == '8': #If we found our target node...
+                print(f'distance from 5 to 8 is {steps}')
             for node in graph[currNode]: #Iterate over neighbors of currNode
                 if node not in visited:
                     queue.append(node)
                     visited.add(node)
-                    if node == '8': #If we found our target node...
-                        print(f'distance from 5 to 8 is {steps}')
             steps += 1
         return output
+    
+    #This implementation is compatible with graphs where a dequeued node may have multiple unvisited neighbors. It counts the distance from root to
+    #target correctly. Instead of counting the steps of the overall traversal, we keep track of the steps take to reach each individual node.
+    def bfs3(self, graph: dict[str, list]) -> list[str]:
+        output = [] #Store the bfs traversal order
+        queue = deque()
+        visited = set()
+        queue.append(['5', 0]) #Append root node and the fact that it took zero steps to reach it
+        visited.add('5') #Add root node
+        while queue:
+            currNode = queue.popleft() #currNode is a list [nodeName, stepsFromRoot]
+            output.append(currNode[0])
+            if currNode[0] == '8': #If we found our target node...
+                print(f'distance from 5 to 8 is {currNode[1]}')
+            for node in graph[currNode[0]]: #Iterate over neighbors of currNode
+                if node not in visited:
+                    queue.append([node, currNode[1]+1])
+                    visited.add(node)
+        return output
+    
+    #This implementation is also compatible with graphs where a dequeued node may have multiple unvisited neighbors. It counts the distance from root to
+    #target correctly. We use an extra loop to count the number of steps correctly.
+    def bfs4(self, graph: dict[str, list]) -> list[str]:
+        output = [] #Store the bfs traversal order
+        steps = 0
+        queue = deque()
+        visited = set()
+        queue.append('5') #Append root node
+        visited.add('5') #Add root node
+        while queue:
+            #We add this extra for loop because each node we encounter has multiple unvisited neighbors
+            #this way, we pop the queue the number of times nodes were added to the queue in the previous level 'layer' of exploration
+            #Need to do it this way to get an accurate count of numSteps, which is supposed to be the number of 'layers' of exploration
+            for _ in range(len(queue)):
+                currNode = queue.popleft()
+                output.append(currNode)
+                if currNode == '8': #If we found our target node...
+                    print(f'distance from 5 to 8 is {steps}')
+                for node in graph[currNode]: #Iterate over neighbors of currNode
+                    if node not in visited:
+                        queue.append(node)
+                        visited.add(node)
+            steps += 1
+        return output
+    
 
     #This implementation also allows you to see the path from root to target along with the distance
     #This looks tricky but is simple once you understand it. Basically, we are not holding individual nodes in the queue
@@ -44,7 +93,7 @@ class Solution:
     #The algorithm is literally the same as any other BFS, only difference is that we queue the entire path instead of invidual nodes.
     #We simply take the end of the current path as our current node (obviously). We no longer need the steps variable since the lenght of the path
     #list tells us the length of the path to reach the target. This works well but it takes a lot of memory since we store a lot of redundant lists.
-    def bfs3(self, graph: dict[str, list]) -> list[str]:
+    def bfs5(self, graph: dict[str, list]) -> list[str]:
         output = [] #Store the bfs traversal order
         queue = deque()
         visited = set()
@@ -83,9 +132,15 @@ def main():
     '8' : []
     }
     solution = Solution()
-    #print(solution.bfs(graph)) # ['5', '3', '7', '2', '4', '8', '8']
-    #print(solution.bfs2(graph)) # ['5', '3', '7', '2', '4', '8']
-    print(solution.bfs3(graph)) # Distance between 5 and 8 is 2 and the path is ['5', '7', '8'] traversal = ['5', '3', '7', '2', '4', '8']
+    #print(solution.bfs(graph)) # ['5', '3', '7', '2', '4', '8', '8'] distance = 5 and 6 since we visited node 8 twice from different routes
+    #print(solution.bfs2(graph)) # ['5', '3', '7', '2', '4', '8'] distance = 5
+    #NOTE: both the distances above from nodes 5 to 8 are incorrect!! Since those implementations don't calculate distance correctly when
+    # a node can have multiple unvisited neighbors. They do traversal correctly, however.
+
+    #The implementations below show the correct distance since they count distance correctly when a dequeued node may have multiple unvisited neighbors
+    #print(solution.bfs3(graph)) # ['5', '3', '7', '2', '4', '8'] distance = 2
+    #print(solution.bfs4(graph)) # ['5', '3', '7', '2', '4', '8'] distance = 2
+    print(solution.bfs5(graph)) # Distance between 5 and 8 is 2 and the path is ['5', '7', '8'] traversal = ['5', '3', '7', '2', '4', '8']
 
 if __name__ == "__main__": #Entry point
     main() #Calling main method
