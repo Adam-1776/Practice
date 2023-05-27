@@ -86,7 +86,9 @@ class Solution:
         return output
     
 
-    #This implementation also allows you to see the path from root to target along with the distance
+    #This implementation also allows you to see the path from root to target along with the distance. Since we're storing the full path
+    #to encounter each node, we naturally also have the distance from root to each node. It works fine in graphs where a node has multiple
+    #unvisited neighbor nodes.
     #This looks tricky but is simple once you understand it. Basically, we are not holding individual nodes in the queue
     #We are holding the entire path in list form that it took to reach the last node in that path. We append and dequeue on this basis.
     #The first time we encounter the target value, we know it's the shortest path, and we already have the path recorded.
