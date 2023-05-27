@@ -13,7 +13,8 @@ class Solution:
             else: #If it's in the last three rows
                 return 6 + (col // 3)
         
-        #More efficient helper method to return square number for a given cell
+        #More efficient helper method to return square number for a given cell. We're numbering the squares so that
+        #its number is the number of squares above and to its left
         def getSquare2(row: int, col: int) -> int:
             return (3 * (row // 3)) + (col // 3)
 
