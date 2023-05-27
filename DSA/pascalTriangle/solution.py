@@ -17,7 +17,7 @@ class Solution:
             #We need create a new copy of numList since we will overwrite numList in the next row
         return triangle
 
-    #Does NOT work, same approach, but use a try catch to catch index errors.
+    #Does NOT work, same approach, but attempted a try catch to catch index errors.
     def generate2(self, numRows: int) -> list[list[int]]:
         if numRows < 1 : return None
         triangle = [[1]]
