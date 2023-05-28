@@ -3,6 +3,8 @@ class Solution:
     
     #Basic recursive template of DFS. No need to manually use a stack since recursion implicitly uses the call stack
     #As you can see, in DFS we continuously search deeper and deeper on the first unvisited neighbor we encounter for each node
+    #While this can optionally be used to find a target node, it is not guaranteed to be the shortest path and we don't store
+    #the path or the length of the path anyway in this template.
     def dfs(self, graph: dict[str, list]) -> list[str]:
 
         def getNeighbors(currNode: str) -> list[str]: #Helper method to get the neighbors of a node
@@ -15,13 +17,43 @@ class Solution:
             if currRoot == target: #If we only want to traverse, can omit the functionality to check for target
                 print(f'Found the target {target}!')
             output.append(currRoot) #Record the order in which we have visited nodes
-            for neighbor in getNeighbors(currRoot): #Like BFS, we get the neighbors of the current node
+            neighbors = getNeighbors(currRoot)
+            for neighbor in neighbors: #Like BFS, we get the neighbors of the current node
                 if neighbor not in visited:
                     visited.add(neighbor)
                     dfsRecursive(neighbor, target, visited) #Recurse on this neighbor. Notice we we will continuously recurse on the first unvisited neighbor
 
         visited.add("5")
         dfsRecursive("5", "8", visited) #If we only want to traverse, specifying a target is optional
+        return output
+    
+
+    #Basic non-recursive template of DFS. Same technique as above except we manually use a stack instead of recursion
+    #While this can optionally be used to find a target node, it is not guaranteed to be the shortest path and we don't store
+    #the path or the length of the path anyway in this template.
+    def dfs2(self, graph: dict[str, list]) -> list[str]:
+
+        def getNeighbors(currNode: str) -> list[str]: #Helper method to get the neighbors of a node
+            return graph[currNode]
+        
+        visited = set() #We don't re-visit nodes in this implementation
+        stack = [] #We use this list as a stack to store the order in which we will visit unvisited nodes
+        output = [] #Record the order in which we traverse the nodes in this lis
+        visited.add("5")
+        stack.append("5")
+        target = "8" #This is optional
+
+        while stack:
+            currNode = stack.pop()
+            if currNode == target: #Searching for target is optional if we just want to traverse
+                print(f'Found the target {target}!')
+            output.append(currNode)
+            neighbors = getNeighbors(currNode)
+            for neighbor in neighbors:
+                if neighbor not in visited:
+                    visited.add(neighbor)
+                    stack.append(neighbor)
+
         return output
         
 
@@ -38,9 +70,7 @@ def main():
     }
     solution = Solution()
     print(solution.dfs(graph)) # ['5', '3', '2', '4', '8', '7'] We only visit 8 once, since we don't re-visit any node
-    #print(solution.bfs2(graph)) # ['5', '3', '7', '2', '4', '8'] distance = 5
-    #NOTE: both the distances above from nodes 5 to 8 are incorrect!! Since those implementations don't calculate distance correctly when
-    # a node can have multiple unvisited neighbors. They do traversal correctly, however.
+    print(solution.dfs2(graph)) # ['5', '7', '8', '3', '4', '2'] this is also a valid DFS traversal. We only visit 8 once, since we don't re-visit any node
 
     #The implementations below show the correct distance since they count distance correctly when a dequeued node may have multiple unvisited neighbors
     #print(solution.bfs3(graph)) # ['5', '3', '7', '2', '4', '8'] distance = 2
