@@ -3,6 +3,7 @@ from collections import deque
 #https://leetcode.com/problems/number-of-islands/
 
 class Solution:
+    #BFS solution
     def numIslands(self, grid: list[list[str]]) -> int:
         n, m = len(grid[0]), len(grid) #n is horizontal length, m is vertical height
         visited = set() #Hold all the nodes we have visited in tuple form
@@ -89,9 +90,43 @@ class Solution:
                     numIslands += 1
         return numIslands
 
-    
-    #Simpler approach using recursive DFS. It is easier to validate neighbors this way.
-    def numIslands3(self, grid: list[list[str]]) -> int:
+    #Alternate approach using non-recursive DFS. Instead of only pushing valid land neighbors to the stack, we push
+    #all possible neighbors to the stack and validate it at the beginning of each iteration. This makes the code more concise.
+    #Same underlying logic as numIslands2.
+    def numIsland3(self, grid: list[list[str]]) -> int:
+
+        numRows, numColumns = len(grid), len(grid[0])
+        visited = set()
+
+        def dfs(coordinates: tuple):
+            stack = []
+            stack.append(coordinates) #Append tuple (row, col)
+            visited.add(coordinates) #Add this coordinate to our visited set
+            while stack:
+                currNode = stack.pop()
+                row, col = currNode[0], currNode[1]
+                if row < 0 or row >= numRows or col < 0 or col >= numColumns:
+                    continue #Skip this node since we are in the water
+                if grid[row][col] != "1":
+                    continue #Skip this node since we are in the water
+                neighbors = [(row-1, col), (row+1, col), (row, col+1), (row, col-1)]
+                for neighbor in neighbors:
+                    if neighbor not in visited:
+                        visited.add(neighbor)
+                        stack.append(neighbor)
+            
+        
+        numIslands = 0
+        for row in range(numRows):
+            for column in range(numColumns):
+                currValue = grid[row][column]
+                if currValue == "1" and (row, column) not in visited:
+                    dfs((row,column)) #Pass a tuple
+                    numIslands += 1
+        return numIslands
+
+    #Simpler approach as numIslands3 using recursive DFS.
+    def numIslands4(self, grid: list[list[str]]) -> int:
 
         numRows, numColumns = len(grid), len(grid[0])
         visited = set()
@@ -125,7 +160,7 @@ class Solution:
     #It doesn't matter for this problem whether we use BFS/DFS/recursion since our goal is simply to discover all nodes
     #in the island and the order in which we discover thme doesn't matter
     #Here, we mark a node as "2" to indicate it's been visited and is part of an already discovered island
-    def numIslands4(self, grid: list[list[str]]) -> int:
+    def numIslands5(self, grid: list[list[str]]) -> int:
         n, m = len(grid[0]), len(grid) #n is horizontal length, m is vertical height
         numIslands = 0
 
