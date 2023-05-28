@@ -4,7 +4,7 @@ from collections import deque
 import math
 
 class Solution:
-    #BFS solution. Faster solutions likely exist, may need to revisit this problem.
+    #BFS solution. Faster solutions likely exist that use approaches other than BFS, may need to revisit this problem.
     def numSquares(self, n: int) -> int:
 
         #Helper method to get the list of neighbors for a given node
