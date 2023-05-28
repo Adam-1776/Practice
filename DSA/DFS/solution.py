@@ -118,7 +118,7 @@ class Solution:
             output.append(currNode[-1])
             neighbors = getNeighbors(currNode[-1])
             for neighbor in neighbors:
-                stack.append(list(currNode) + [neighbor])
+                stack.append(list(currNode) + [neighbor]) #Append neighbor to the list so far and push it to the stack
 
         print(f'Shortest path from root to {target} is {shortestPath}')
         return output
