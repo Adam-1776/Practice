@@ -4,7 +4,6 @@ import math
 
 class Solution:
     def evalRPN(self, tokens: list[str]) -> int:
-
         stack = [] #This stack will contain all the numbers, as well as result of prior computed expressions, that are in line for further operation
         #When we encounter an operator, we replace the top two elements in the stack with the result of the operation. Note that the stack does not contain
         #operators, only numbers. These numbers could be directly from the tokens list, or numbers that we computed
@@ -30,7 +29,28 @@ class Solution:
         #We have run out of numbers and operators. The stack now only contains the result of the entire expression. In theory, it could be continued to be used if the expression
         #was longer.
         return int(stack.pop())
+    
 
+    #Slightly cleaner approach in which we store integers in the stack instead of strings
+    def evalRPN2(self, tokens: list[str]) -> int:
+        stack = []
+        for token in tokens:
+            if token not in ["-", "*", "+", "/"]:
+                stack.append(int(token)) #Convert to integer before pushing to stack
+
+            else:
+                operator = token
+                right = stack.pop()
+                left = stack.pop()
+                if operator == "+":
+                    stack.append(left + right)
+                elif operator == "-":
+                    stack.append(left - right)
+                elif operator == "*":
+                    stack.append(left * right)
+                else:
+                    stack.append(int(left / right)) #This is another way to truncate a division operation towards zero
+        return stack.pop()
 
 #The key this problem is the fact that whenever an operator is encountered, it operates on the two most recent numbers or expressions that came before it.
 #Since we perform the operation and update the stack each time an operator is encountered, further operators will act upon the result of prior expressions instead of necessarily
@@ -38,6 +58,7 @@ class Solution:
 def main():
     solution = Solution()
     print(solution.evalRPN(["10","6","9","3","+","-11","*","/","*","17","+","5","+"]))
+    print(solution.evalRPN2(["10","6","9","3","+","-11","*","/","*","17","+","5","+"]))
     
     
 if __name__ == "__main__": #Entry point
