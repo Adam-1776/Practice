@@ -45,13 +45,87 @@ class Solution:
                     numIslands += 1
                     bfs(x,y)
         return numIslands
+    
 
-    #Simpler solution, use recursion instead of BFS to traverse outwards from each unvisited land node
+    #Alternate approach using non-recursive DFS. Also, our helper method both finds neighbors and checks if it is land.
+    def numIslands2(self, grid: list[list[str]]) -> int:
+
+        numRows, numColumns = len(grid), len(grid[0])
+        visited = set()
+
+        def getLandNeighbors(coordinates: tuple) -> list[tuple]: #Helper method to return list of neighboring land coordinates
+            row, col = coordinates[0], coordinates[1]
+            landNeighbors = []
+            if (row + 1) < numRows and grid[row+1][col] == "1":
+                landNeighbors.append((row+1, col))
+            if (row - 1) >= 0 and grid[row-1][col] == "1":
+                landNeighbors.append((row-1, col))
+            if (col + 1) < numColumns and grid[row][col+1] == "1":
+                landNeighbors.append((row, col+1))
+            if (col - 1) >= 0 and grid[row][col-1] == "1":
+                landNeighbors.append((row, col-1))
+            return landNeighbors
+
+
+        def dfs(coordinates: tuple):
+            stack = []
+            stack.append(coordinates) #Append tuple (row, col)
+            visited.add(coordinates) #Add this coordinate to our visited set
+            while stack:
+                currNode = stack.pop()
+                neighbors = getLandNeighbors(currNode)
+                for neighbor in neighbors:
+                    if neighbor not in visited:
+                        visited.add(neighbor)
+                        stack.append(neighbor)
+            
+        
+        numIslands = 0
+        for row in range(numRows):
+            for column in range(numColumns):
+                currValue = grid[row][column]
+                if currValue == "1" and (row, column) not in visited:
+                    dfs((row,column)) #Pass a tuple
+                    numIslands += 1
+        return numIslands
+
+    
+    #Simpler approach using recursive DFS. It is easier to validate neighbors this way.
+    def numIslands3(self, grid: list[list[str]]) -> int:
+
+        numRows, numColumns = len(grid), len(grid[0])
+        visited = set()
+
+        def dfs(coordinates: tuple):
+            row, col = coordinates[0], coordinates[1]
+            if row < 0 or row >= numRows or col < 0 or col >= numColumns:
+                return #We are out of bounds and therefore in water
+            if grid[row][col] != "1":
+                return #We are not on land, so return
+            visited.add(coordinates) #Add this coordinate to our visited set
+            neighbors = [(row-1, col), (row+1, col), (row, col+1), (row, col-1)]
+            for neighbor in neighbors:
+                if neighbor not in visited:
+                    dfs(neighbor)
+            
+        
+        numIslands = 0
+        for row in range(numRows):
+            for column in range(numColumns):
+                currValue = grid[row][column]
+                if currValue == "1" and (row, column) not in visited:
+                    dfs((row,column)) #Pass a tuple
+                    numIslands += 1
+        return numIslands
+    
+    
+    #Even simpler solution, mark the grid directly instead of a seperate set.
+    #Use recursion instead of BFS to traverse outwards from each unvisited land node
     #This recursive approach ends up behaving like DFS, which makes sense since recursion and DFS both use stacks
     #It doesn't matter for this problem whether we use BFS/DFS/recursion since our goal is simply to discover all nodes
     #in the island and the order in which we discover thme doesn't matter
     #Here, we mark a node as "2" to indicate it's been visited and is part of an already discovered island
-    def numIslands2(self, grid: list[list[str]]) -> int:
+    def numIslands4(self, grid: list[list[str]]) -> int:
         n, m = len(grid[0]), len(grid) #n is horizontal length, m is vertical height
         numIslands = 0
 
@@ -87,7 +161,7 @@ def main():
     ["0","0","1","0","0"],
     ["0","0","0","1","1"]]
     solution = Solution()
-    print(solution.numIslands(grid)) #3
+    print(solution.numIslands2(grid)) #3
     
     
 
