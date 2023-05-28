@@ -41,6 +41,21 @@ class Solution:
                 else: #If the top of the stack does not have the matching opening bracket to the closing bracket we just found ...
                     return False #We have a mismatch, return false.
         return not stack #If the stack is empty, then everything matched. If there were mismatches, the stack has elements.
+    
+    #More concise solution using a dictionary and a deque
+    def isValid3(self, s: str) -> bool:
+        if len(s) < 2 : return False #Must have two characters to be balanced
+        stack = deque() #Initialize an empty deque, we'll use it as a stack
+        bracketMap = {'}':'{',')':'(',']':'['} #Set closing brackets as the key, since we lookup this dictionary when encountering closing brackets
+        for char in s:
+            if char in bracketMap.values():
+                stack.append(char)
+            elif char in bracketMap.keys():
+                if stack and bracketMap[char] == stack[-1]:
+                    stack.pop()
+                else:
+                    return False
+        return not stack
 
 
 
