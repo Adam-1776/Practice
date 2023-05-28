@@ -6,12 +6,12 @@ class Solution:
         for a in asteroids:
             while stack and a < 0 and stack[-1] > 0:
                 if (a + stack[-1]) < 0: #top of stack is destroyed by a
-                    stack.pop()
+                    stack.pop() #Do not break the while loop, since a might destroy further asteroid in the stack below
                 elif (a + stack[-1]) > 0: #a is destroyed by top of stack
-                    break
+                    break #Break the loop since a is destroyed. We also don't add a to the stack.
                 else: #both a and top of stack destroy each other
                     stack.pop()
-                    break
+                    break #Break the loop since a is destroyed. We also don't add a to the stack.
             else: #This else statement is always executed UNLESS we entered the above while loop AND a break statement was executed
                 stack.append(a)
         return stack

@@ -29,6 +29,8 @@ class Solution:
     def removeElements(self, head: Optional[ListNode], val: int) -> Optional[ListNode]:
         dummyNode = ListNode(-1,head) #Add a dummy node before the head of the list
         currNode = dummyNode
+        #We check the value in front of currNode instead of currNode itself, since if we find a node that needs to be removed,
+        #we have to modify the node behind the unwanted node, not the unwanted node itself!
         while currNode.next: #Keep iterating up until currNode is the second last Node in the list
             if currNode.next.val == val: #Check the value of the node in front of currNode
                 currNode.next = currNode.next.next #Skip the unwanted node by setting the next pointer accordingly

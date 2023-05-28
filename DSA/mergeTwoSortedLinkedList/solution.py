@@ -34,7 +34,7 @@ class Solution:
         #since we can easily just append the surviving list after the loop is complete. On the other hand,
         #using a 'or' loop made more sense in the add two numbers problem, since you can just assign 0 as the value of the dead node
         #and keep the loop going till both nodes are dead.
-        while list1 and list2:
+        while list1 and list2: #Keep going until either list1 or list2 is exhausted
             if list1.val < list2.val :
                 cur.next = ListNode(list1.val)
                 list1 = list1.next #Be careful, we only advance one list in each iteration
