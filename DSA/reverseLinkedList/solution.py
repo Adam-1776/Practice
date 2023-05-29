@@ -41,16 +41,19 @@ class Solution:
 
     #Approach with O(1) space complexity
     def reverseList2(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        #keep track of two nodes at once, make temp point to prev
-        prev = None
-        temp = head
-        while temp:
-            next = temp.next #Record the node ahead
-            temp.next = prev #Set temp to point to prev next
-            prev = temp #Move prev forward
-            temp = next #Move temp forward
-        #At the end of the loop, temp will be None and prev will be the new head
-        return prev
+        #keep track of two nodes: the current node and the node behind current node
+        #In the loop we also get the next node, so we are actually tracking three nodes.
+        currNode = head #Start off current node as head
+        prevNode = None #The node behind current node is None (since the currNode is the head right now)
+        while currNode: #Keep going till currentNode has reached the end
+            nextNode = currNode.next #Record the node ahead
+            currNode.next = prevNode #currNode should now point to its previous node
+            prevNode = currNode #Move prevNode forward
+            currNode = nextNode #Move currNode forward
+        #At the end of the loop, currNode will be None and prevNode will be the new head
+        #This is because the tail of the original list will be the head of the new list.
+        #At the end of the loop, currNode will be beyond the tail of the original list, and prevNode will be the tail of the original list
+        return prevNode
 
 
 def main():
