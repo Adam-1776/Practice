@@ -48,8 +48,8 @@ class Solution:
         while current.next: #Keep going until the second last Node since we compare the current node with the one ahead of it
             if current.val == current.next.val: #If the next node has the same value
                 current.next = current.next.next #Make the current node point to the one twice ahead
-            else:
-                current = current.next #Once we find a unique node, make the current node point to it. This will skip any duplicate nodes we had encountered
+            else: #Use an else statement since we don't want to increment the current node if we just skipped a duplicate (common pattern to not increment prev pointer when doing deletion in a linked list)
+                current = current.next #Once we find a unique node in front of current, move the current node to it. This will skip any duplicate nodes we had encountered
         return head
 
 
@@ -57,7 +57,7 @@ def main():
     solution = Solution()
     nums = [1,2,2,3,3,3,3,4,4,5,6,7,7]
     head1 = createList(nums)
-    ans = solution.deleteDuplicates(head1) #2131 which represents 1312
+    ans = solution.deleteDuplicates(head1)
     ans.printList()
     
     
