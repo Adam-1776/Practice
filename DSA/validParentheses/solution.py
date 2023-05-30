@@ -45,7 +45,7 @@ class Solution:
     #More concise solution using a dictionary and a deque
     def isValid3(self, s: str) -> bool:
         if len(s) < 2 : return False #Must have two characters to be balanced
-        stack = deque() #Initialize an empty deque, we'll use it as a stack
+        stack = deque() #Initialize an empty deque, we'll use it as a stack. Alternately you can use a list as a stack
         bracketMap = {'}':'{',')':'(',']':'['} #Set closing brackets as the key, since we lookup this dictionary when encountering closing brackets
         for char in s:
             if char in bracketMap.values():
@@ -56,6 +56,19 @@ class Solution:
                 else:
                     return False
         return not stack
+
+    #Even more concise solution
+    def isValid4(self, s: str) -> bool:
+        if len(s) < 2 : return False
+        stack = deque()
+        bracketMap = {'}':'{',')':'(',']':'['}
+        for char in s:
+            if char in bracketMap.values(): #char is an opening bracket
+                stack.append(char)
+            else: #char is a closing bracket
+                if not stack or bracketMap[char] != stack.pop():
+                    return False
+        return not stack #We expect the stack to be empty if parentheses are valid
 
 
 
