@@ -33,7 +33,7 @@ class Solution:
 
     #Non recursive DFS approach. We use a dictionary to not only store which nodes have been visited, but also to save the equivalent node in the new graph
     #for each node in the original graph. Then we perform a DFS, creating new Nodes and adding them to the map as appropriate.
-    def cloneGraph(self, node: 'Node') -> 'Node':
+    def cloneGraph2(self, node: 'Node') -> 'Node':
         if not node: return node
         newRoot = Node(node.val) #Clone the root node
         mapOldtoNew = dict() #Maps old node to its equivalent node in the new graph. This also acts as our visited set

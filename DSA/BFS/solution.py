@@ -98,7 +98,7 @@ class Solution:
     def bfs5(self, graph: dict[str, list]) -> list[str]:
         output = [] #Store the bfs traversal order
         queue = deque()
-        visited = set()
+        visited = set() #Note: visited only stores address of a node, not the entire path list that's in the queue
         queue.append(['5']) #Append path so far (just the root node for now). Note that queue now contains lists, not individual nodes.
         while queue:
             path = queue.popleft() #Current path
