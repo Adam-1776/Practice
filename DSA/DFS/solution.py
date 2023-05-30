@@ -11,9 +11,9 @@ class Solution:
             return graph[currNode]
         
         visited = set() #We don't re-visit nodes in this implementation
-        output = [] #Record the order in which we traverse the nodes in this list
+        output = [] #Record the order in which we traverse the nodes in this list (not needed in most leetcode problems)
 
-        def dfsRecursive(currRoot: str, target: str, visited:set):
+        def dfsRecursive(currRoot: str, target: str, visited:set): #Adding target and visited is optional here since this is a python helper function
             if currRoot == target: #If we only want to traverse, can omit the functionality to check for target
                 print(f'Found the target {target}!')
             output.append(currRoot) #Record the order in which we have visited nodes
@@ -37,7 +37,7 @@ class Solution:
             return graph[currNode]
         
         visited = set() #We don't re-visit nodes in this implementation
-        stack = [] #We use this list as a stack to store the order in which we will visit unvisited nodes
+        stack = [] #We use this list as a stack to store the order in which we will visit unvisited nodes (not needed in most leetcode problems)
         output = [] #Record the order in which we traverse the nodes in this lis
         visited.add("5")
         stack.append("5")

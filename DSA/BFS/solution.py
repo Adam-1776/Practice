@@ -5,7 +5,7 @@ class Solution:
     #Also, this implementation should not be used to find the minimum distance from one node to another if a node can have multiple univisited neighbors
     #In such graphs, the traversal is done correctly but it does not count distance correctly from root to target node
     def bfs(self, graph: dict[str, list]) -> list[str]:
-        output = [] #Store the bfs traversal order
+        output = [] #Store the bfs traversal order (not needed in most leetcode problems)
         steps = 0
         queue = deque()
         queue.append('5') #Append root node
@@ -23,7 +23,7 @@ class Solution:
     #Also, this implementation should not be used to find the minimum distance from one node to another if a node can have multiple univisited neighbors
     #In such graphs, the traversal is done correctly but it does not count distance correctly from root to target node
     def bfs2(self, graph: dict[str, list]) -> list[str]:
-        output = [] #Store the bfs traversal order
+        output = [] #Store the bfs traversal order (not needed in most leetcode problems)
         steps = 0
         queue = deque()
         visited = set()
@@ -44,7 +44,7 @@ class Solution:
     #This implementation is compatible with graphs where a dequeued node may have multiple unvisited neighbors. It counts the distance from root to
     #target correctly. Instead of counting the steps of the overall traversal, we keep track of the steps take to reach each individual node.
     def bfs3(self, graph: dict[str, list]) -> list[str]:
-        output = [] #Store the bfs traversal order
+        output = [] #Store the bfs traversal order (not needed in most leetcode problems)
         queue = deque()
         visited = set()
         queue.append(['5', 0]) #Append root node and the fact that it took zero steps to reach it
@@ -63,7 +63,7 @@ class Solution:
     #This implementation is also compatible with graphs where a dequeued node may have multiple unvisited neighbors. It counts the distance from root to
     #target correctly. We use an extra loop to count the number of steps correctly.
     def bfs4(self, graph: dict[str, list]) -> list[str]:
-        output = [] #Store the bfs traversal order
+        output = [] #Store the bfs traversal order (not needed in most leetcode problems)
         steps = 0
         queue = deque()
         visited = set()
@@ -96,7 +96,7 @@ class Solution:
     #We simply take the end of the current path as our current node (obviously). We no longer need the steps variable since the lenght of the path
     #list tells us the length of the path to reach the target. This works well but it takes a lot of memory since we store a lot of redundant lists.
     def bfs5(self, graph: dict[str, list]) -> list[str]:
-        output = [] #Store the bfs traversal order
+        output = [] #Store the bfs traversal order (not needed in most leetcode problems)
         queue = deque()
         visited = set() #Note: visited only stores address of a node, not the entire path list that's in the queue
         queue.append(['5']) #Append path so far (just the root node for now). Note that queue now contains lists, not individual nodes.
