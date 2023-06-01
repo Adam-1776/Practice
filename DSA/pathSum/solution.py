@@ -28,11 +28,12 @@ def createList(nums: list[int]) -> ListNode :
 class Solution:
     #Note that the sum must be reached at a leaf node, not in the middle of the tree!
     def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
+        #This helper method basically does preorder DFS traversal
         def hasPathHelper(node, sum):
             if node == None : return False #Terminal case: if there was a solution in this path it would have been found already
             sum += node.val #Add current node to the sum so far
             if sum == targetSum and node.left == None and node.right == None : return True #Positive terminal case
-            return hasPathHelper(node.left, sum) or hasPathHelper(node.right, sum) #Recursion
+            return hasPathHelper(node.left, sum) or hasPathHelper(node.right, sum) #Recursion. Check if either of the subtrees can find a valid path to target
 
         if not root : return False
         return hasPathHelper(root, 0)

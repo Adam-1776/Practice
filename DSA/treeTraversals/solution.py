@@ -1,4 +1,5 @@
 from typing import Optional
+from collections import deque
 #https://leetcode.com/problems/binary-tree-postorder-traversal/
 #https://leetcode.com/problems/binary-tree-inorder-traversal/
 #https://leetcode.com/problems/binary-tree-preorder-traversal/
@@ -68,6 +69,36 @@ class Solution:
 
         traversalHelper(root)
         return traversalList
+    
+    #Level order is  basically a plain BFS traversal.
+    def levelOrder(self, root: Optional[TreeNode]) -> list[int]:
+        queue = deque()
+        queue.append(root)
+        traversal = []
+        while queue:
+            currNode = queue.popleft()
+            if not currNode: continue #Need to validate here, since we don't validate when adding to queue
+            traversal.append(currNode.val)
+            #Below, we add neighbors of currNode to the queue
+            queue.append(currNode.left)
+            queue.append(currNode.right)
+        return traversal
+
+    #This level order implementation returns a 2D list, with each level of nodes in a seperate row
+    def levelOrder2(self, root: Optional[TreeNode]) -> list[list[int]]:
+        queue = deque()
+        if root: queue.append(root) #Need to perform validation upfront
+        traversal = []
+        while queue:
+            traversal.append([])
+            for _ in range(len(queue)): #We use the inner loop trick to count each level or 'layer' of the traversal seperately. Have to do this since each node has multiple unvisited neighbors
+                currNode = queue.popleft()
+                #No need to validate currNode, since we only enqueue valid nodes
+                traversal[-1].append(currNode.val) #Append this node to the latest row in traversal
+                #Below, we add valid neighbors of currNode to the queue.
+                if currNode.left: queue.append(currNode.left)
+                if currNode.right: queue.append(currNode.right)
+        return traversal
 
 
 def main():
