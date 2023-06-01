@@ -78,6 +78,45 @@ class Solution:
             return True
         else: return False
 
+    #Plain DFS implementation
+    def hasPathSum4(self, root: Optional[TreeNode], targetSum: int) -> bool:
+        if not root: return False
+        stack = []
+        stack.append([root, root.val]) #Stack contains the [currentRoot, totalSumOnThisPathSoFar]
+
+        while stack:
+            currTraversal = stack.pop()
+            currNode, currSum = currTraversal[0], currTraversal[1]
+            if currNode.left == None and currNode.right == None and currSum == targetSum: #If currNode is a leaf node
+                return True
+            if currNode.left:
+                stack.append([currNode.left, currSum + currNode.left.val])
+            if currNode.right:
+                stack.append([currNode.right, currSum + currNode.right.val])
+            
+        return False
+
+    #Plain DFS that also stores the path
+    def hasPathSum5(self, root: Optional[TreeNode], targetSum: int) -> bool:
+        if not root: return False
+        stack = []
+        stack.append([[root], root.val]) #Stack contains the [[currentPath], totalSumOnThisPathSoFar]
+
+        while stack:
+            currTraversal = stack.pop()
+            #Current node is the last node in the list. We don't need to store the currSum since we can compute currSum
+            #in each traversal by adding up all the nodes in the path, but we store it for efficiency.
+            #Note that currPath is a list of node pointers, not their values
+            currPath, currNode, currSum = currTraversal[0], currTraversal[0][-1], currTraversal[1]
+            if currNode.left == None and currNode.right == None and currSum == targetSum: #If currNode is a leaf node
+                print(f'Path is {[i.val for i in currPath]}') #List comprehension to get all values in currPath
+                return True
+            if currNode.left: #Only valid neighbors are added to the stack, so we don't need to validate the currNode in each iteration
+                stack.append([currPath + [currNode.left], currSum + currNode.left.val])
+            if currNode.right:
+                stack.append([currPath + [currNode.right], currSum + currNode.right.val])
+            
+        return False
 
 def main():
     print('No test case available')
