@@ -29,18 +29,20 @@ class Solution:
     #The trick is to check ALL the nodes to see if their subtree is balanced. It is not enough to just see if the subtrees of the root are balanced!
     def isBalanced(self, root: Optional[TreeNode]) -> bool:
 
-        #Helper function to find height of tree. If there is an imbalance of more than one for any subtree, return -1
-        def depth(root):
-            if root == None : return 0
-            leftHeight = depth(root.left) #Need to record the depth of the subtree for each node this recursive function is called upon
-            rightHeight = depth(root.right)
-            if leftHeight == -1 or rightHeight == -1 : return -1 #If any of the subtrees at any call to this recursive function is imbalanced, exit immediately
-            if abs(leftHeight - rightHeight) > 1 : return -1
-            return max(1 + leftHeight, 1 + rightHeight)
+        #This helper function returns depth of subtree rooted in currNode. If it's imbalanced, it returns -1
+        #Notice how the return integer conveys two pieces of information: depth as well as its height
+        #We can do this since if the subtree is imbalanced, then we don't need its height.
+        def depth(currNode):
+            if not currNode: return 0 #Terminal case: this subtree is balanced but zero height
+            leftHeight = depth(currNode.left)
+            rightHeight = depth(currNode.right)
+            if leftHeight == -1 or rightHeight == -1: #If either child is imbalanced, this subtree is imbalanced 
+                return -1
+            if abs(leftHeight - rightHeight) > 1: #If children subtrees are balanced but have much different heights...
+                return -1 #Then this subtree is imbalanced. Terminate here.
+            return 1 + max(leftHeight, rightHeight)
 
-        if root == None : return True
         return depth(root) != -1
-
 
 def main():
     print('No test case available')

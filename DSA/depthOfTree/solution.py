@@ -27,10 +27,11 @@ def createList(nums: list[int]) -> ListNode :
 """
 
 class Solution:
-    #Recursive solution for depth of tree
+    #Recursive solution for depth of tree given its root
     def maxDepth(self, root: Optional[TreeNode]) -> int:
         if root == None : #Terminal case
             return 0
+        #The height of this node is 1 + height of its tallest child subtree
         return max(1 + self.maxDepth(root.left) , 1 + self.maxDepth(root.right))
 
     #Recursive solution for minimum depth between root and any leaf node
