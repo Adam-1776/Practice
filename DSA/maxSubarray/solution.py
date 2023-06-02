@@ -25,7 +25,21 @@ class Solution:
             right += 1
         print(f'The largest subarray is from index {largestSubArray[0]} to {largestSubArray[1]} with sum {largestSum}')
         return largestSum
+
+
+
+    #Very concise sliding window implementation. This does not keep track of indexes however
+    def maxSubArray(self, nums: list[int]) -> int:
+        if not nums: return 0
+        largestSum = nums[0]
+        currentSum = nums[0] #Start off largestSum and currentSum at index 0
+        #Iterate over the rest of the list starting at index 1
+        for i in range(1, len(nums)):
+            currentSum = max(nums[i], currentSum+nums[i]) #Ditch the current window and start a new window at index i if that would give us a higher currentSum
+            largestSum = max(largestSum, currentSum) #Keep track of the highest currentSum found
+        return largestSum
     
+
 
     #Brute force approach
     def maxSubArray2(self, nums: list[int]) -> int:
