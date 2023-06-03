@@ -28,7 +28,9 @@ def createList(nums: list[int]) -> ListNode :
     return head
 """
 
+
 class Solution:
+
     #Postorder is a type of DFS. The nodes recorded in traversal[] are not really the honest in order in which we visited the nodes. They're actually recorded in
     #backwards order for the left subtree, then the right subtree
     def postorderTraversal(self, root: Optional[TreeNode]) -> list[int]:
@@ -43,6 +45,8 @@ class Solution:
         traversalHelper(root)
         return traversalList
 
+
+
     #Inorder is a type of DFS. The nodes recorded in traversal[] are not really the honest in order in which we visited the nodes. They're actually recorded in
     #backwards order for the left subtree, then the root is recorded, and then the right subtrees.
     def inorderTraversal(self, root: Optional[TreeNode]) -> list[int]:
@@ -56,7 +60,27 @@ class Solution:
 
         inorderHelper(root)
         return traversal
-    
+
+
+    #Iterative in order traversal using stack
+    def inorderTraversal2(self, root: Optional[TreeNode]) -> list[int]:
+        traversal = []
+        stack = []
+        currNode = root
+        while True:
+            if currNode: #We always try to go as left as we can and push it to the stack
+                stack.append(currNode)
+                currNode = currNode.left
+            elif(stack): #currNode is none, but we can pop from the stack
+                currNode = stack.pop() #The top of the stack will have the leftmost node we have yet to visit, we pop it
+                traversal.append(currNode.val) #We can now officially record this node as being traversed since we exhausted its the leftmost node we haven't marked
+                currNode = currNode.right #After recording then node as traversed, we then look at its right child
+            else:
+                break
+        return traversal
+
+
+
     #Preorder is a plain DFS with left recursion. The traversal[] list honestly records the order in which we visited the nodes in the graph.
     def preorderTraversal(self, root: Optional[TreeNode]) -> list[int]:
         traversalList = []
@@ -69,7 +93,24 @@ class Solution:
 
         traversalHelper(root)
         return traversalList
-    
+
+
+
+    #Preorder using iterative DFS with stack.
+    def preorderTraversal2(self, root: Optional[TreeNode]) -> list[int]:
+        traversalList = []
+        stack = []
+        if root: stack.append(root) #In this case, we choose to validate while appending to stack
+        #Alternatively, we could also blindy append to stack and only validate while popping. That also works.
+        while stack:
+            currNode = stack.pop()
+            traversalList.append(currNode.val)
+            if currNode.right: stack.append(currNode.right) #Notice how we add the right child first to emulate left recursion
+            if currNode.left: stack.append(currNode.left)
+        return traversalList
+
+
+
     #Level order is  basically a plain BFS traversal.
     def levelOrder(self, root: Optional[TreeNode]) -> list[int]:
         queue = deque()
@@ -88,6 +129,7 @@ class Solution:
     def levelOrder2(self, root: Optional[TreeNode]) -> list[list[int]]:
         queue = deque()
         if root: queue.append(root) #Need to perform validation upfront
+        #Note: we do validation when appending to queue because we do not want any null nodes in the queue.
         traversal = []
         while queue:
             traversal.append([])
