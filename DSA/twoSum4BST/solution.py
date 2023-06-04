@@ -10,6 +10,8 @@ class TreeNode:
         self.right = right
 
 class Solution:
+    #The fact that the tree is a BST isn't relevant in this implementation, it works on any binary tree. A more efficient approach
+    #may be possible by tailoring our implementation to a BST.
     def findTarget(self, root: Optional[TreeNode], k: int) -> bool:
         foundNodes = set()
         def dfs(currNode):
