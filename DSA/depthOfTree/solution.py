@@ -38,7 +38,7 @@ class Solution:
     def minDepth(self, root: Optional[TreeNode]) -> int:
         #This problem is tricker than max depth of tree!
         #We cannot simply stop at a 'None' node, since the parent of this 'None' node may not be a leaf node, have to be more careful
-        #Notice how we don't explicitly store the depht of the current node. We implicitly know since we add one to each recursive call we make
+        #Notice how we don't explicitly store the depth of the current node. We implicitly know since we add one to each recursive call we make
         def depth(node):
             if node == None : return 0 #Terminal case
             if node.left == None and node.right == None: return 1 #Terminal case where have found a leaf node
@@ -59,7 +59,7 @@ class Solution:
             #Don't need to check if currNode is None, since we check before calling the method in the first place.
             if not currNode.left and not currNode.right: #Terminal case, subtree has height one since it is a leaf
                 return 1
-            #Height of tree in non-terminal cases rooted in currNode is 1 + height of its shortest child subtree
+            #Height of tree in non-terminal cases rooted in currNode is 1 + height of its shortest child subtree (or 1 + height of its only subtree, if it has just one subtree)
             if not currNode.left: #If only right node is present
                 return 1 + depthHelper(currNode.right)
             if not currNode.right: #If only left node is present
