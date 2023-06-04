@@ -1,8 +1,7 @@
 from collections import deque
-from typing import Optional
 
 #https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/
-#https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/ (related)
+#https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/ (this solution also works for this problem, albeit not the most efficiently)
 
 
 class TreeNode:
@@ -12,8 +11,8 @@ class TreeNode:
         self.right = right
 
 class Solution:
-    #Note: This implementation works on any binary tree regardless of how the nodes are ordered. More efficiency might be possible
-    #if we know the tree is a BST.
+    #Note: This implementation works on any binary tree regardless of how the nodes are ordered. More efficiency is possible
+    #if we know the tree is a BST since we can then predict the locations of p and q based on the current node's value
     #Also, this approach is inefficient due to us repeatedly creating new lists, which has linear complexity
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
         p_path = []
