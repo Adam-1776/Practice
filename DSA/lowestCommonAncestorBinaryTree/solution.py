@@ -44,38 +44,55 @@ class Solution:
 
 
     #Much faster approach since we don't repeatedly create lists. This implementation is also for any binary tree, not tailored to a BST or any other specific type of tree.
+    #It also takes into account the case of either p or q not being in the tree. In that case, None will be returned.
     def lowestCommonAncestor2(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        parents = {} #Dictionary where the key is a node, and the value is its parent node. The root is not added as a key in this dictionary.
+        parent  = {} #Key is node, value is it's parent
         queue = deque()
         if root:
             queue.append(root) #Validation while enqueing
-        #Standard BFS/level order traversal
+            parent[root] = None #Parent of root set to None
         while queue:
             currNode = queue.popleft()
-            if p in parents and q in parents: #If we have found both p and q nodes, we can stop the traversal
+            if p in parent and q in parent: #If we have found both p and q nodes, we can stop the traversal
                 break
             if currNode.left:
                 queue.append(currNode.left)
-                parents[currNode.left] = currNode #Record the parent of this node
+                parent[currNode.left] = currNode #Record the parent of this node
             if currNode.right:
                 queue.append(currNode.right)
-                parents[currNode.right] = currNode #Record the parent of this node
+                parent[currNode.right] = currNode #Record the parent of this node
 
         p_set = set()
         p_set.add(p)
         currNode = p
-        while currNode in parents:
-            p_set.add(parents[currNode])
-            currNode = parents[currNode]
-        #p_set now contains all the nodes in the path going from the root to p
+        while currNode in parent:
+            p_set.add(parent[currNode])
+            currNode = parent[currNode]
+        #p_set now contains all the nodes in the path going from p to root including None at the top
         currNode = q
-        while currNode != root: #Iterate upwards from q by repeatedly accessing its parents, thus traversing the path from q to root
-            if currNode in p_set: #The first node we encounter that is also in the p_set is the least common ancestor
-                return currNode
-            currNode = parents[currNode]
+        while currNode != None: #Iterate upwards from q by repeatedly accessing its parents, thus traversing the path from q to root
+            if currNode in p_set: #The first node we encounter that is also in the p_set is the lowest common ancestor
+                return currNode #Return the lowest ancestor that we found
+            currNode = parent[currNode]
         
-        return currNode
+        return currNode #If this line is reached, currNode is None and no common ancestor exists because p or q not in the tree
 
+
+
+
+    #Very clever recursive approach, but does not take into account the case of p or q not in the tree
+    def lowestCommonAncestor4(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+            if root in (None, p, q): return root #Terminal case, p or q is the root
+            left = self.lowestCommonAncestor4(root.left, p, q)
+            right = self.lowestCommonAncestor4(root.right, p, q)
+            
+            if not left and not right: return None; 
+            if left and right: return root
+            if not left:
+                return right
+            else:
+                return left
+        
 
 def main():
     print('No test case available')
