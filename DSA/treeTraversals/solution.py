@@ -49,6 +49,7 @@ class Solution:
 
     #Inorder is a type of DFS. The nodes recorded in traversal[] are not really the honest in order in which we visited the nodes. They're actually recorded in
     #backwards order for the left subtree, then the root is recorded, and then the right subtrees.
+    #Inorder is handy on BST because it prints all the nodes in ascending order
     def inorderTraversal(self, root: Optional[TreeNode]) -> list[int]:
         traversal = []
 
@@ -62,21 +63,19 @@ class Solution:
         return traversal
 
 
-    #Iterative in order traversal using stack
+    #Iterative in order traversal using stack. This can be handy in certain problems such as finding kth smallest element in a BST
     def inorderTraversal2(self, root: Optional[TreeNode]) -> list[int]:
         traversal = []
         stack = []
         currNode = root
-        while True:
-            if currNode: #We always try to go as left as we can and push it to the stack
-                stack.append(currNode)
+        while currNode or stack:
+            if currNode: #We try to move down and to the left as our 'first preference'
+                stack.append(currNode) #Add this node to the stack since we haven't traversed it's right subtree yet
                 currNode = currNode.left
-            elif(stack): #currNode is none, but we can pop from the stack
-                currNode = stack.pop() #The top of the stack will have the leftmost node we have yet to visit, we pop it
-                traversal.append(currNode.val) #We can now officially record this node as being traversed since we exhausted its the leftmost node we haven't marked
-                currNode = currNode.right #After recording then node as traversed, we then look at its right child
             else:
-                break
+                currNode = stack.pop() #We pop the 'lowest' node who's left subtree is exhausted
+                traversal.append(currNode.val) #We print the node before moving to its right subtree
+                currNode = currNode.right
         return traversal
 
 

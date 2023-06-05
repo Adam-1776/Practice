@@ -1,7 +1,7 @@
 from collections import deque
 
 #https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/
-#https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/ (this solution also works for this problem, albeit not the most efficiently)
+#https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/ (this solution also works for BST, albeit not the most efficiently)
 
 
 class TreeNode:
