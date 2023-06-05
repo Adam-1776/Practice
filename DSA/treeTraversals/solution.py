@@ -69,10 +69,10 @@ class Solution:
         stack = []
         currNode = root
         while currNode or stack:
-            if currNode: #We try to move down and to the left as our 'first preference'
+            if currNode: #We try to move down and to the left as our 'first preference' if currNode is valid
                 stack.append(currNode) #Add this node to the stack since we haven't traversed it's right subtree yet
                 currNode = currNode.left
-            else:
+            else: #If we are in a null node, have no choice but to backtrack up by popping from the stack.
                 currNode = stack.pop() #We pop the 'lowest' node who's left subtree is exhausted
                 traversal.append(currNode.val) #We print the node before moving to its right subtree
                 currNode = currNode.right

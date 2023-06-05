@@ -32,6 +32,26 @@ class Solution:
 
         return bstHelper(root, float(-inf), float(inf)) #The root node has no restrictions on its minimum or maximum value
     
+
+
+    #This implementation takes advantage of the fact that an inorder traversal of a valid BST prints nodes in strictly increasing order.
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        currNode = root
+        prevNode = None #This node holds the latest node that would have been 'printed' or 'marked' in an inorder traversal
+        stack = []
+        #Perform an interative inorder traversal
+        while currNode or stack:
+            if currNode:
+                stack.append(currNode)
+                currNode = currNode.left
+            else:
+                currNode = stack.pop()
+                if prevNode and prevNode.val >= currNode.val: #If the current node isn't bigger than the last node that was printed, not a valid BST
+                    return False
+                prevNode = currNode #We would have printed currNode at this point. So set prevNode to equal currNode and continue
+                currNode = currNode.right
+        return True
+    
 def main():
     print('No test case available')
     
