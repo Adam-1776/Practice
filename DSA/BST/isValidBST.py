@@ -35,7 +35,7 @@ class Solution:
 
 
     #This implementation takes advantage of the fact that an inorder traversal of a valid BST prints nodes in strictly increasing order.
-    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+    def isValidBST2(self, root: Optional[TreeNode]) -> bool:
         currNode = root
         prevNode = None #This node holds the latest node that would have been 'printed' or 'marked' in an inorder traversal
         stack = []
