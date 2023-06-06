@@ -12,8 +12,8 @@ class Solution:
         return True
 
 
-    #Solution without sorting. Technically linear time complexity, but in real life it may be slower than sorting.
-    def canMakeArithmeticProgression(self, arr: list[int]) -> bool:
+    #Solution without sorting. It has linear time complexity
+    def canMakeArithmeticProgression2(self, arr: list[int]) -> bool:
         smallest, greatest = min(arr), max(arr)
         diff = (greatest - smallest) / (len(arr) - 1) #Calculate the expected difference between all the nums if they are sorted
         if diff == 0: return True #If diff is 0, then all the values are the same. This is the only case where duplicate values are allowed
