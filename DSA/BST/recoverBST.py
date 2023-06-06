@@ -25,16 +25,16 @@ class Solution:
             else:
                 currNode = stack.pop()
                 if prevNode and currNode.val <= prevNode.val: #If this node is not bigger than prevNode...
-                    foundNodes.append(currNode)
+                    foundNodes.append(currNode) #currNode is too small to be here and/or prevNode is too big to be here
                     foundNodes.append(prevNode) #Add then to our foundNodes list
                 prevNode = currNode
                 currNode = currNode.right
         
         #print(f'{[node.val for node in foundNodes]}')
         #foundNodes will have either 2 or 4 values assuming only one pair of nodes has to be swapped. Swap their values only to keep structure intact.
-        if len(foundNodes) == 2:
+        if len(foundNodes) == 2: #If there's only two problematic nodes, swap em
             foundNodes[0].val, foundNodes[1].val = foundNodes[1].val, foundNodes[0].val
-        elif len(foundNodes) == 4:
+        elif len(foundNodes) == 4: #If there's four nodes, swap the middle two values is the first prevNode that was too big, and the second currNode that was too small
             foundNodes[1].val, foundNodes[2].val = foundNodes[2].val, foundNodes[1].val
 
 
