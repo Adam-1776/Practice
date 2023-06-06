@@ -17,7 +17,7 @@ class Solution:
         stack = []
         prevNode = None #Last node that would have been printed in the inorder traversal
         currNode = root
-        #Perform an inorder traversal iteratively (recursive would also work)
+        #Perform an inorder traversal iteratively (recursive would also work). You could also do a morris inorder traversal for true O(1) space complexity
         while currNode or stack:
             if currNode:
                 stack.append(currNode)
