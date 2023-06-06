@@ -31,6 +31,25 @@ class Solution:
             if currNode.right: stack.append(currNode.right) #only push valid children to stack
             if currNode.left: stack.append(currNode.left)
         return None
+    
+
+    #Better approach with O(log(n)) time if the tree is balanced. In this case we basically traverse the BST
+    #searching for p or q. If we run into either p or q, it is the LCA. If we find a node that lies in between p and q
+    #We know this node is their LCA.
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        if p.val > q.val: #We want p to be smaller for simplicity
+            p, q = q, p
+        currNode = root
+        while currNode:
+            if currNode.val > p.val and currNode.val < q.val:
+                return currNode
+            if currNode.val == p.val or currNode.val == q.val:
+                return currNode
+            if currNode.val > p.val:
+                currNode = currNode.left
+            else:
+                currNode = currNode.right
+        return currNode 
 
 
 

@@ -51,11 +51,12 @@ class Solution:
         if root:
             queue.append(root) #Validation while enqueing
             parent[root] = None #Parent of root set to None
+        #We do a BFS traversal, but a DFS traversal would also work since we just need to locate p and q nodes
         while queue:
             currNode = queue.popleft()
             if p in parent and q in parent: #If we have found both p and q nodes, we can stop the traversal
                 break
-            if currNode.left:
+            if currNode.left: #Validate child nodes before adding
                 queue.append(currNode.left)
                 parent[currNode.left] = currNode #Record the parent of this node
             if currNode.right:
@@ -80,7 +81,7 @@ class Solution:
 
 
 
-    #Very clever recursive approach, but does not take into account the case of p or q not in the tree
+    #Very clever recursive approach
     def lowestCommonAncestor4(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
             if root in (None, p, q): return root #Terminal case, p or q is the root
             left = self.lowestCommonAncestor4(root.left, p, q)
