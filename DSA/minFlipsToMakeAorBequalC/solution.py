@@ -29,7 +29,7 @@ class Solution:
         return numFlips
 
 
-    
+    #More clever and concise method that uses bit manipulation    
     def minFlips2(self, a: int, b: int, c: int) -> int:
         numFlips = 0
         while a > 0 or b > 0 or c > 0: #Keep going until all three of these integers equals zero
