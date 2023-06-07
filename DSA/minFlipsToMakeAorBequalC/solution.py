@@ -1,7 +1,13 @@
 #https://leetcode.com/problems/minimum-flips-to-make-a-or-b-equal-to-c/
 
 class Solution:
+    #Verbose method that converts the integers into binary strings, and compares each char in the string
     def minFlips(self, a: int, b: int, c: int) -> int:
+
+        binA = a & 1
+        print(type(binA))
+        print(binA)
+
         binC = bin(c).replace("0b", "")
         binA = bin(a).replace("0b", "")
         binB = bin(b).replace("0b", "") #Convert A, B, C into binary strings
@@ -20,6 +26,26 @@ class Solution:
                 if binA[i] != binC[i] and binB[i] != binC[i]: #Both A and B have zero at this index
                     numFlips += 1
 
+        return numFlips
+
+
+    
+    def minFlips2(self, a: int, b: int, c: int) -> int:
+        numFlips = 0
+        while a > 0 or b > 0 or c > 0:
+            a_bit = a & 1 #Set a_bit to an integer equal to 0 or 1, matching the rightmost bit in a
+            b_bit = b & 1
+            c_bit = c & 1
+
+            if c_bit ==  0: #If the current bit in c is zero...
+                numFlips += a_bit + b_bit #We have to flip each of the ones in a and b to make them zero
+            elif a_bit == 0 and b_bit == 0: #If current bit in c is one and both a and b are zero...
+                numFlips += 1 #We can flip either the bit in a or b
+
+            a = a >> 1
+            b = b >> 1
+            c = c >> 1
+        
         return numFlips
 
 
