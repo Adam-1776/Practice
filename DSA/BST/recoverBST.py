@@ -12,6 +12,7 @@ class TreeNode:
 
 
 class Solution:
+    #This implementation takes advantage of the fact that an inorder traversal of a BST prints the nodes in ascending order
     def recoverTree(self, root: Optional[TreeNode]) -> None:
         foundNodes = [] #List of nodes that are out of order when doing inorder traversal
         stack = []
@@ -34,7 +35,7 @@ class Solution:
         #foundNodes will have either 2 or 4 values assuming only one pair of nodes has to be swapped. Swap their values only to keep structure intact.
         if len(foundNodes) == 2: #If there's only two problematic nodes, swap em
             foundNodes[0].val, foundNodes[1].val = foundNodes[1].val, foundNodes[0].val
-        elif len(foundNodes) == 4: #If there's four nodes, swap the middle two values is the first prevNode that was too big, and the second currNode that was too small
+        elif len(foundNodes) == 4: #If there's four nodes, swap the middle two values which are the first prevNode that was too big, and the second currNode that was too small
             foundNodes[1].val, foundNodes[2].val = foundNodes[2].val, foundNodes[1].val
 
 
