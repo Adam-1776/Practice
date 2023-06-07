@@ -48,8 +48,10 @@ class Solution:
 
 
 def main():
-    print('No test case')
-    #Check if a linked list has any cycles. In other words, does any node have a next pointer that goes 'backwards' to a previous node.
+    solution = Solution()
+    listHead = createList([1,2,3,4,5])
+    listHead = solution.swapPairs(listHead)
+    listHead.printList() # 2 1 4 3 5 
     
     
 

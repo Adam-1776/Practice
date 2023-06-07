@@ -30,6 +30,16 @@ class Solution:
                     break
 
         return result
+    
+
+    #Clever and fast solution, might be too verbose for interviews
+    def intToRoman2(self, num):
+        ones = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"]
+        tens = ["", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"]
+        hrns = ["", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"]
+        ths = ["", "M", "MM", "MMM"]
+        #Use the % operator to shave off digits from the right side before dividing
+        return ths[num / 1000] + hrns[(num % 1000) / 100] + tens[(num % 100) / 10] + ones[num % 10]
 
 
 
