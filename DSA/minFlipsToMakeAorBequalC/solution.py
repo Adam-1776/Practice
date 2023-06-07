@@ -32,10 +32,11 @@ class Solution:
     
     def minFlips2(self, a: int, b: int, c: int) -> int:
         numFlips = 0
-        while a > 0 or b > 0 or c > 0:
-            a_bit = a & 1 #Set a_bit to an integer equal to 0 or 1, matching the rightmost bit in a
-            b_bit = b & 1
-            c_bit = c & 1
+        while a > 0 or b > 0 or c > 0: #Keep going until all three of these integers equals zero
+            a_bit = a & 1 #Set a_bit to an integer equal to 0 or 1, matching the rightmost bit in a.
+            b_bit = b & 1 #The reason b & 1 returns the rightmost bit of b is because 1 equals ...000001 in binary
+            c_bit = c & 1 #So all the bits except the rightmost are guaranteed to be zero when the and operation is performed.
+            #Only the rightmost bit will be one if both operands have one as their last bit.
 
             if c_bit ==  0: #If the current bit in c is zero...
                 numFlips += a_bit + b_bit #We have to flip each of the ones in a and b to make them zero
@@ -44,7 +45,7 @@ class Solution:
 
             a = a >> 1
             b = b >> 1
-            c = c >> 1
+            c = c >> 1 #Shift the bits in these three integers to the right. This will remove the rightmost bit that at we processed in this iteration
         
         return numFlips
 
