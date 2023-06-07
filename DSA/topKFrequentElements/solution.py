@@ -19,6 +19,12 @@ class Solution:
         return result #result is now a list containing the k most frequent elements
 
 
+    #Fast approach with linear complexity. This takes advantage of the fact that Counter most_common() method has linear complexity since it uses heap
+    def topKFrequent2(self, nums: list[int], k: int) -> list[int]:
+        frequency = Counter(nums)
+        return [key for key,val in frequency.most_common(k)]
+
+
 
 def main():
     solution = Solution()
