@@ -36,18 +36,16 @@ class Solution:
         if root: queue.append(root)
         result = []
         level = 0
+        #This is a normal BFS level order traversal for the most part
         while queue:
             levelQueue = deque() #This queue will store the nodes found in this level. Use queue for efficiency in case we need to store in reverse order
-            for _ in range(len(queue)):
+            for _ in range(len(queue)): #Inner loop to keep track of level. Necessary because each node has multiple unvisited neighbors
                 currNode = queue.popleft()
-                #print(f'currNode = {currNode.val} and level = {level}')
-                if level % 2 == 1: #print the level right to left if we are on an odd level
-                    levelQueue.appendleft(currNode.val)
-                else:
-                    levelQueue.append(currNode.val)
+                levelQueue.appendleft(currNode.val)
                 if currNode.left: queue.append(currNode.left)
                 if currNode.right: queue.append(currNode.right)
-            result.append(list(levelQueue))
+            if level % 2 == 1: result.append(list(levelQueue)) #If level is odd, convert the queue to a list and append it to our 2D list
+            else: result.append(list(reversed(levelQueue))) #If level is even, reverse the queue, convert to a list and append it to our 2D list
             level += 1
         return result
 
