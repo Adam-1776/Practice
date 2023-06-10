@@ -11,7 +11,7 @@ class Solution:
 
         def condition(indexVal):
             indexVal -= 1 #Decrement indexVal because we have already accounted for all elements being one or greater
-            arrSum = n #Sum of array is n to start with, since all elements are one
+            arrSum = n #Sum of array is n to start with, since all elements are one one or greater
             #Basically, we will calculate on the basis of elements 'on top' of one. So for our purposes a value of 0 is acceptable
             b = max(indexVal-index, 0) #Smallest element on the lefthand side (there are index elements to the left of this index)
             arrSum += (indexVal + b) * (indexVal-b+1) // 2 #Incrememt sum of [b, b+1,...indexVal] to arrSum
@@ -24,7 +24,7 @@ class Solution:
 
 
         #Find the maximum value of indexVal such that condition() is true using binary search
-        l, r = 1, maxSum+2
+        l, r = 1, maxSum+2 #Minimum possible value is 1, setting that as l. Had to give maxSum+2 as r for some reason to pass all test cases
         while l < r:
             mid = l + (r - l) // 2
             if condition(mid):
