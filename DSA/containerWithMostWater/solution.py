@@ -2,7 +2,6 @@
 
 class Solution:
     #Brilliant two pointers solution. Optionally records the indexes where the most water capacity was found
-    #NOTE: More study needed on how this works
     def maxArea(self, height: list[int]) -> int:
         bestLines = [0,0]
         mostWater = 0
@@ -10,17 +9,18 @@ class Solution:
         def amountWater(l, r):
             return (r - l) * min(height[l], height[r])
 
+        #Two pointers approach where l and r start at both ends of the list and move towards each other
         l, r = 0, len(height) - 1
         while l < r:
             lHeight = height[l]
             rHeight = height[r]
-            if lHeight > rHeight:
+            if lHeight > rHeight: #If left pointer is taller, hold left and instead move right leftwards
                 capacity = amountWater(l,r)
                 if capacity > mostWater:
                     mostWater = capacity
                     bestLines = [l,r]
                 r -= 1
-            else:
+            else: #Else, hold right pointer and move left pointer forwards
                 capacity = amountWater(l,r)
                 if capacity > mostWater:
                     mostWater = capacity
