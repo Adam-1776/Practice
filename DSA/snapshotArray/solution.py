@@ -31,7 +31,7 @@ class SnapshotArray:
 
     def get(self, index: int, snap_id: int) -> int:
         #Note that the first element in all the lists in arr[index] are sorted by their first element (the snapshotId)
-        #We can use bisect to find the correct index in arr[index] that is smaller than (snap_id+1). This is equal to finding the biggest entry that is <= snapshot_id
+        #We can use bisect to find the correct snapId in arr[index] that is smaller than (snap_id+1). This is equal to finding the smallest entry that is >= snapshot_id
         #The bisect() method uses binary search internally. Notice how we compare with a list [snap_id+1] since list cannot be compared to integer
         i = bisect.bisect(self.arr[index], [snap_id+1])
         return self.arr[index][i-1][1]
