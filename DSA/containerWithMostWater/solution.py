@@ -10,6 +10,8 @@ class Solution:
             return (r - l) * min(height[l], height[r])
 
         #Two pointers approach where l and r start at both ends of the list and move towards each other
+        #This makes sense when you think about it. The maximum capacity will always be achieved with two indexes where r > l.
+        #So we can start r at its max position and l at its minimum position and move them towards each other.
         l, r = 0, len(height) - 1
         while l < r:
             lHeight = height[l]
