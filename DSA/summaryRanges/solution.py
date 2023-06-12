@@ -33,13 +33,32 @@ class Solution:
             currRange = str(nums[left])
             while right < n and nums[right] == nums[right-1] + 1:
                 right += 1
-            right -= 1
+            right -= 1 #Decrement right pointer since the while condition is no longer true (i.e. the right pointer has overshot by one at the end of the loop)
             if right != left:
-                currRange += "->" + str(nums[right])
-            left = right + 1
+                currRange += "->" + str(nums[right]) #If we found consecutive integers, we can add it to our current range
+            left = right + 1 #Everything up to and including right has been accounted for, start from the index after that
             right = left + 1
             result.append(currRange)
         return result
+    
+
+    #Even more concise
+    def summaryRanges(self, nums: list[int]) -> list[str]:
+        res = []
+        s = 0 #this is our starting index for each range. The first range starts at index 0 so we initialize it as such
+        n = len(nums)
+        while s < n:
+            e = s #Set end index equal to s
+            while e+1 < n and nums[e]+1 == nums[e+1]:
+                e+=1 #Keep incrementing e until the nums[e+1] is no longer consecutive to nums[e].
+            #e now points to the last index in the current range
+            if s == e: #if s and e are equal, only one integer in this range
+                res.append(f'{nums[s]}')
+            else:
+                res.append(f'{nums[s]}->{nums[e]}')
+            s = e+1 #Everything till e has been accounted for, move onto the index after that
+        return res
+    
 
 
 
