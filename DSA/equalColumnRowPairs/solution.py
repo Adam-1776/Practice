@@ -54,6 +54,15 @@ class Solution:
         return count
 
 
+    #Extremely clever approach, need to study how this works https://leetcode.com/problems/equal-row-and-column-pairs/solutions/2328910/python3-3-lines-transpose-ctr-w-explanation-t-m-100-100/
+    def equalPairs3(self, grid: list[list[int]]) -> int:
+        tpse = Counter(zip(*grid))                  # <-- determine the transpose
+                                                    #     and hash the rows
+        grid = Counter(map(tuple,grid))             # <-- hash the rows of grid. (Note the tuple-map, so
+                                                    #     we can compare apples w/ apples in next step.)
+        return  sum(tpse[t]*grid[t] for t in tpse)  # <-- compute the number of identical pairs
+
+
 
 def main():
     solution = Solution()
