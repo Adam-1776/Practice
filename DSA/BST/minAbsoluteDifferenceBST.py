@@ -14,6 +14,7 @@ class Solution:
     #Need to traverse all the nodes to find which two have the minimum absolute difference
     #Perform an in-order traversal, taking advantage of the fact that in-order traversal of BST prints in ascending order
     #Therefore, the two nodes that form the minimum absolute difference must be traversed consecutively in an in-order traversal
+    #O(n) time complexity and O(log(n)) space complexity due to the stack used for inorder traversal. Might be able to reduce space with a morris inorder traversal
     def getMinimumDifference(self, root: Optional[TreeNode]) -> int:
         lastNode = None #The last node that would have printed in the inorder traversal
         minDifference = float(inf)
@@ -51,7 +52,11 @@ class Solution:
 
         preorder(root)
         return minDifference
-    
+
+
+
+#Note: If the tree was not a BST. The approach would be to do any traversal and append all the values in a list.
+#Then, sort the list. Then traverse the list to find the adjacent elements with the smallest difference. This approach would have nlog(n) complexity
 def main():
     print('No test case available')
     
