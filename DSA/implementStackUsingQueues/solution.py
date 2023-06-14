@@ -64,6 +64,8 @@ class MyStack:
 #Furthermore, once you dequeue/enqueue n-1 times, the relative order of the elements will remain the same since we're performing rotation. Therefore, if you
 #pop the leftmost value after rotation the rest of the queue will be in its original order
 #O(1) complexity for push, O(n) complexity for pop and top
+#Note: you can also make a version of this with O(n) push and O(1) pop. For that you'll have to reverse n-1 times after appending an element during push
+    #That will ensure that the value that was last pushed will always be the leftmost element in the queue
 class MyStack2:
 
     def __init__(self):
