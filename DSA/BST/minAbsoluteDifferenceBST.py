@@ -27,7 +27,7 @@ class Solution:
             else:
                 currNode = stack.pop()
                 if lastNode: #Compare the currNode to the lastNode. If their difference is the minimum found so far, update minDifference
-                    minDifference = min(abs(lastNode.val - currNode.val), minDifference)
+                    minDifference = min(abs(lastNode.val - currNode.val), minDifference) #Note, we could do without the abs() function since we know currNode is always bigger than lastNode
                 lastNode = currNode
                 currNode = currNode.right
 
