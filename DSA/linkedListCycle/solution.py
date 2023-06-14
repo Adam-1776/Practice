@@ -26,12 +26,20 @@ def createList(nums: list[int]) -> ListNode :
     return head
 
 class Solution:
+    #This uses O(n) space complexity because of the set
     def hasCycle(self, head: Optional[ListNode]) -> bool:
         seen = set() #Set of all node addresses we've seen
         while head:
             if id(head) in seen : return True #We've seen this address before, so there must be a cycle
             seen.add(id(head))
             head = head.next
+        return False #If we reach the end of the list, there is no cycle
+    
+
+
+    #TODO: Use Floyd's cycle finding algorithm (tortoise and hare) to solve with O(1) space complexity
+    def hasCycle2(self, head: Optional[ListNode]) -> bool:
+        
         return False #If we reach the end of the list, there is no cycle
 
 
