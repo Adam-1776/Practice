@@ -55,6 +55,27 @@ class Solution:
             return currRoot
 
         return helper(preorder, inorder)
+    
+
+    #Optimized solution. We do not actually create new lists for inorder and preorder, we simply specify the start and end indexes for those lists in each recursive call.
+    def buildTree(self, preorder: list[int], inorder: list[int]) -> Optional[TreeNode]:
+
+        inorderIndexes = dict() #Create dictionary where key is element, and value is its index in inorder. Eliminates the need for linear search in inorder
+        for i in range(len(inorder)):
+            inorderIndexes[inorder[i]] = i
+
+        def helper(preStart, preEnd, inStart, inEnd):
+            if preStart > preEnd or inStart > inEnd: #Terminal case
+                return None
+            currRoot = TreeNode(preorder[preStart]) #The the first element in preorder is the currRoot
+            inorderIndex = inorderIndexes[currRoot.val]
+            numLeft = inorderIndex - inStart
+            numRight = inEnd - inorderIndex
+            currRoot.left = helper(preStart+1, preStart+numLeft, inStart, inorderIndex - 1) #New preorder and inorder subarrays are specified. Notice how if numLeft is zero, preStart > preEnd and the null will be returned by the upcoming recursive call.
+            currRoot.right = helper(preStart+numLeft+1, preStart+numLeft+numRight, inorderIndex+1, inEnd)
+            return currRoot
+
+        return helper(0, len(preorder)-1, 0, len(inorder)-1)
 
 
 def main():
