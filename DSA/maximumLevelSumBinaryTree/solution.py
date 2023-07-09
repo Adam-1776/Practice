@@ -35,16 +35,16 @@ class Solution:
         if root:
             queue.append(root)
         while queue:
-            sum = 0
+            currentSum = 0
             for _ in range(len(queue)):
                 currNode = queue.popleft()
-                sum += currNode.val
+                currentSum += currNode.val
                 if currNode.left:
                     queue.append(currNode.left)
                 if currNode.right:
                     queue.append(currNode.right)
-            if sum > levelSum:
-                level, levelSum = currLevel, sum
+            if currentSum > levelSum:
+                level, levelSum = currLevel, currentSum
             currLevel += 1
         return level
 
