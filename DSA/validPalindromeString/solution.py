@@ -29,6 +29,23 @@ class Solution:
             r -= 1
         return True
 
+    #Another two pointers approach
+    def isPalindrome3(self, s: str) -> bool:
+        seq = list(s.lower())
+        l, r = 0, len(seq)-1
+        while l < r:
+            while l < r and (not seq[l].isalnum()): #We have to keep checking our main condition l < r since we are updating the pointers in this loop
+                l += 1
+            while l < r and (not seq[r].isalnum()):
+                r -= 1
+            #After the above two loops, l and r will point to the latest alphanumeric characers that not been compared from the left and right respectively, OR l and r will be equal
+            if seq[l] != seq[r]:
+                print(f'{l} and {r} are false')
+                return False
+            l += 1
+            r -= 1
+        return True
+
 
 def main():
     solution = Solution()

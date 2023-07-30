@@ -25,6 +25,17 @@ class Solution:
             else : #If our mid is too big ...
                 r = mid
 
+    #More concise approach, uses binary search template to find the greatest integer that meets the condition mid^2 <= x
+    def mySqrt3(self, x: int) -> int:
+        l, r = 1, x+1
+        while l < r:
+            mid = l + (r - l) // 2
+            if mid * mid <= x:
+                l = mid + 1
+            else:
+                r = mid
+        return l-1
+
          
 
 

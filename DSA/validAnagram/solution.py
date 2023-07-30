@@ -18,6 +18,8 @@ class Solution:
             scount[s[i]] += 1
             tcount[t[i]] += 1
         return scount == tcount
+    
+    
             
 
 def main():
