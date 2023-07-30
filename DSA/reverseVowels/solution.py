@@ -14,6 +14,7 @@ class Solution:
             while l < r and seq[r] not in vowels:
                 r -= 1
             #Similar loop for r pointer. r will point to a vowel after the above loop
+            #Notice that after the above two loops, l or r will point to the next vowels that need to be swapped, OR they will both point to the same index.
             seq[l], seq[r] = seq[r], seq[l] #Since l and r point to the latest vowels that have not been swapped from the left and right sides respectively, we now swap em.
             l += 1
             r -= 1 #Move the pointers
