@@ -4,6 +4,8 @@
 class Solution:
 
     #Simplest approach with two pointers, both pointers start from the left. Linear complexity
+    #This could also be extended to more than two words. Just keep track of the pointers that point to any of the words, but only
+    #compute the shortest distance if both pointers point to different words!
     def shortestDistance(self, words, word1, word2):
         shortestDistance = len(words) # Initialize the shortest distance with the length of the words list
         position1, position2 = -1, -1 # Initialize the positions of word1 and word2 with -1
@@ -19,6 +21,8 @@ class Solution:
 
 
     #Two pointers approach, both start from the left. Linear complexity
+    #The cool thing about this approach is that it could be extended to more than two words. In that case you would change
+    #line 31 to keep incrementing until r as long as it does not point to any of the words. Then as long as r does not equal l, you can compare their distance
     def shortestDistance2(self, words, word1, word2):
         n = len(words)
         shortestDistance = 9999
