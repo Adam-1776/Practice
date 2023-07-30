@@ -74,10 +74,12 @@ class Solution:
         n = len(words)
         index1, index2 = 0, n - 1
         while index1 < n and index2 >= 0:
-            while index1 < n-1 and  words[index1] != word1:
+            while index1 < n and  words[index1] != word1:
                 index1 += 1
-            while index2 > 0 and words[index2] != word2:
+            #index1 now equals word1 OR it's past the end of the list
+            while index2 >= 0 and words[index2] != word2:
                 index2 -= 1
+            #index2 now equals word2 OR it's behind the start of the list
             if words[index1] == word1 and words[index2] == word2:
                 leastDistance = min(leastDistance, abs(index2 - index1))
             index1 += 1
